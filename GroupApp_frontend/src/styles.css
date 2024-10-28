@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --primary-color: #c0faff;
+    --secondary-color: #458696;
+    --tertiary-color: #005463;
+    --accent-color: #fa9038;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
+
+div{
+    overflow: hidden;
+}
+
