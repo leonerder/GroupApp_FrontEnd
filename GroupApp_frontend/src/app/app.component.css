@@ -1,0 +1,8 @@
+
+
+.background{
+    position: fixed;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+}
