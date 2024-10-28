@@ -16,7 +16,7 @@ ricordate prima di scrivere codice di runnare il comando `git pull origin branch
 `pull` permette di aggiornare i file sul vostro pc on la versione piu' aggiornata della repo, cosi non si rischia di sovrascrivere codice quando piu persone lavorano allo stesso file.
 
 ## importante
-quando volete pushare create sempre una branch e pushate la branch, in questo modo su github potrete creare una PUSH REQUEST, notificando tutti gli altri dell'aggiornamento che sta per avvenire ai file nel branch main e poterne in caso discuterne alcune cose nella chat apposita di github. Nel momento in cui qualcosa non va e gli altri lo fanno notare bastera' correggerlo, committare e pushare di nuovo, non servira' fare altre push request in quanto verra' aggiornata quella vecchia, in questo modo possiamo avere un sistema ordinato e in cui non rischiamo di sovrascrivere il codice degli altri
+quando volete pushare create sempre una branch e pushate la branch, in questo modo su github potrete creare una **MERGE REQUEST**, notificando tutti gli altri dell'aggiornamento che sta per avvenire ai file nel branch main e poterne in caso discuterne alcune cose nella chat apposita di github. Nel momento in cui qualcosa non va e gli altri lo fanno notare bastera' correggerlo, committare e pushare di nuovo, non servira' fare altre push request in quanto verra' aggiornata quella vecchia, in questo modo possiamo avere un sistema ordinato e in cui non rischiamo di sovrascrivere il codice degli altri
 
 ## Build
 
