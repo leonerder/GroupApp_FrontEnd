@@ -1,4 +1,4 @@
-div{
+.main_div{
     height: 7%;
     width: 100%;
     display: flex;
@@ -6,4 +6,103 @@ div{
     justify-content: space-evenly;
     align-items: center;
     background-color: var(--tertiary-color);
+}
+
+.sub-div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.left-div{
+    justify-content: flex-start;
+}
+
+.right-div{
+    justify-content: flex-end;
+}
+
+.center-div{
+    justify-content: center;
+}
+
+.element{
+    margin: 3%;
+}
+
+.button1{
+    height: 50%;
+    width: 30%;
+    max-width: 180px;
+    background-color: transparent;  
+    border: none;
+    color: var(--primary-color);
+    font-size: 100%;
+} 
+
+.button1:hover{
+    border: 2px solid var(--accent-color);
+    border-radius: 6px;
+
+}
+
+.button1:active{
+    box-shadow: inset 0px 0px 25px 4px rgba(0,0,0,0.2);
+}
+
+.button2{
+    height: 50%;
+    width: 30%;
+    max-width: 180px;
+    background-color: var(--accent-color);  
+    border-radius: 6px;
+    border: none;
+    color: var(--primary-color);
+    font-size: 100%;
+    font-weight: bold;
+   
+
+}
+
+.button2:active{
+    box-shadow: 0px 0px 25px 4px rgba(0,0,0,0.1);
+}
+
+.search-container{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--accent-color);
+    outline: none;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+
+}
+
+.search-icon{
+    margin: 5px;
+    color: var(--tertiary-color);
+    font-weight: bold   ;
+}
+
+.search-bar{
+    
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--tertiary-color);
+    background: transparent;
+    height: 100%;
+    width: 80%;
+    outline: none;
+    border: none;
+}
+
+.search-bar::placeholder{
+    font-size: 17px;
+    font-weight: normal;
+    background: transparent;
+    color: var(--tertiary-color);
+    outline: none;
+    border: none;
 }
