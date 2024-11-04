@@ -5,7 +5,7 @@
     </div>
     <div class="sub-div center-div">
         <div style="display: flex; justify-content: space-between;" class="search-container">
-            <input class="search-bar" placeholder="Cerca.." type="text">
+            <input class="search-bar" placeholder="Cerca.." type="text" (keyup)="updateFilter()" [(ngModel)]="filter_name">
             <span class="search-icon-background">
                 <mat-icon class="search-icon">search</mat-icon>
             </span>

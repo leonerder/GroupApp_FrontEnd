@@ -1,4 +1,9 @@
 .eventback{
     height: 100%;
     width: 100%;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 5vh;
+    padding-right: 5vh;
+    display: flex;
 }

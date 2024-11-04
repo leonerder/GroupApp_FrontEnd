@@ -1,8 +1,8 @@
 
   <div class="background">
-    <app-topbar></app-topbar>
+    <app-topbar (filter_out)="onFilter($event)"></app-topbar>
     <div class="eventback">
-      <app-event-container></app-event-container>
+      <app-event-container #events></app-event-container>
     </div>
   </div>
   
