@@ -48,13 +48,27 @@
     justify-content: space-between;
 }
 
+.info-container-description{
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
 .align-column{
     flex-direction: column;
     align-items: flex-start;
 }
 
 p{
-    color: var(--tertiary-color)
+    color: var(--tertiary-color);
+    margin: 5px;
+}
+
+.subtitle{
+    font-weight: bold;
 }
 
 .title{

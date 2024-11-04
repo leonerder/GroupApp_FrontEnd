@@ -4,12 +4,16 @@
             <p class="title">Titolo evento</p> 
             <button class="button2">Partecipa</button></div>
         <div class="info-container" style="height: 10%;">
-            <p>data</p>
-            <p>luogo</p>
-            <p>tipo</p>
+            <p class="subtitle">data:</p>
+            <p>{{event?.date?.toDateString()}}</p>
+            <p class="subtitle">luogo:</p>
+            <p>{{event?.place}}</p>
+            <p class="subtitle">tipo:</p>
+            <p>{{event?.type}}</p>
         </div>
-        <div class="info-container">
-            <p> descrizione </p>
+        <div class="info-container-description">
+            <p class="subtitle"> descrizione: </p>
+            <p> {{event?.description}}</p>
         </div>
         
     </div>
