@@ -16,7 +16,7 @@ export class TopbarComponent {
   filter_name = this.filter.name;
   
   public updateFilter(){
-    this.filter.name = this.filter_name;
+    this.filter.name = this.filter_name.toLowerCase().replaceAll(/\s/g,'');
     this.filter_out.emit(this.filter);
   }
   

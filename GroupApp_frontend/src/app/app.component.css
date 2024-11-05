@@ -6,3 +6,9 @@
     height: 100%;
 }
 
+.app-container{
+    height: 100%;
+    position: relative;
+
+}
+

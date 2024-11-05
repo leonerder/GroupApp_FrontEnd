@@ -64,15 +64,17 @@
 }
 
 p{
-    color: var(--tertiary-color);
+    color: var(--primary-color);
     margin: 5px;
 }
 
 .subtitle{
     font-weight: bold;
+    color: var(--tertiary-color);
 }
 
 .title{
+    color: var(--tertiary-color);
     font-size: 24px;
     font-weight: bold;
     margin:0;
