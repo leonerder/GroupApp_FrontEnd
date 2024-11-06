@@ -19,24 +19,45 @@ export class EventContainerComponent {
   constructor(){
     this.events = [];
     this.events_shown = [];
-    this.filters = new Filter("");
+    this.filters = new Filter("",undefined,undefined,Type.SPORT,undefined);
     this.populate(); 
-    this.updateFilters(this.filters)
+    this.updateName('');
+    this.applyFilters();
   }
 
   private populate(){    
     //da cambiare con la chiamata a backend per popolare l'array
     if(this.events){
-      this.events[0] = new Event("partitozza", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT);
-      this.events[1] = new Event("partitina", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT);
+      this.events[0] = new Event("partitozza", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY);
+      this.events[1] = new Event("partitina", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS);
     }
   }
 
-  public updateFilters(filter: Filter){
-    this.filters = filter;
+  public updateName(name: string){
+    this.filters.name = name;
+    this.applyFilters();
+  }
+
+  public updateFilter(filter: Filter){
+    this.filters.startdate = filter.startdate;
+    this.filters.endDate = filter.endDate;
+    this.filters.type = filter.type;
+    this.filters.target = filter.target;
+    this.applyFilters();
+  }
+
+  public applyFilters(){
+    
     if(this.events){
+      this.events_shown = this.events
       this.events_shown = this.events.filter((ev) => {
-        return ev.name.includes(this.filters.name);
+        console.log(this.filters.startdate);
+        console.log(ev.date)
+        return ev.name.includes(this.filters.name) && 
+              ((this.filters.endDate ? ev.date <= this.filters.endDate : true) || 
+              (this.filters.startdate ? ev.date >= this.filters.startdate : true)) && 
+              (this.filters.target ? ev.target == this.filters.target : true) && 
+              (this.filters.type ? ev.type == this.filters.type : true);
       })
     }
     console.log(this.events_shown);
@@ -57,18 +78,26 @@ export class Event{
   private _place;
   private _description;
   private _type;
+  private _target;
   
   
 
-  constructor(name: string, date: Date, place: String, description: String, type: Type){
+  constructor(name: string, date: Date, place: String, description: String, type: Type, target: Target){
     
     this._name = name;
     this._date = date;
     this._place = place;
     this._description = description;
     this._type = type;
+    this._target = target;
   }
 
+  public get target() {
+    return this._target;
+  }
+  public set target(value) {
+    this._target = value;
+  }
   public get name() {
     return this._name;
   }
@@ -88,7 +117,15 @@ export class Event{
 }
 
 export enum Type{
+  
   SPORT = "Sport",
   READING = "Reading",
-  //non so cosa mettere
+  NULL = ''
+}
+
+export enum Target{
+  FAMILY = "Famiglie",
+  KIDS = "Bambini",
+  TEENAGERS = "Ragazzi",
+  ADULTS = "Adulti",
 }

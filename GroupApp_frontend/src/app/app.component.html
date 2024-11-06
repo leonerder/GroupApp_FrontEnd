@@ -1,8 +1,8 @@
 
   <div class="background" >
-    <app-topbar (filter_out)="onFilter($event)" (click)="onClick()"></app-topbar>
+    <app-topbar (filter_out)="onName($event)" (click)="onClick()"></app-topbar>
     <div class="app-container" >
-      <app-filter-sidebar #filters ></app-filter-sidebar>
+      <app-filter-sidebar #filters (filter_out)="onFilter($event)"></app-filter-sidebar>
       <app-event-container #events (click)="onClick()"></app-event-container>
     </div>
   </div>

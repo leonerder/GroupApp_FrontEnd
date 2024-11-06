@@ -17,14 +17,20 @@ export class AppComponent {
   title = 'GroupApp_frontend';
 
   @ViewChild('events') events: EventContainerComponent | undefined;
+  onName(filter: Filter){
+    this.events?.updateName(filter.name);
+  }
   onFilter(filter: Filter){
-    console.log(filter.name);
-    this.events?.updateFilters(filter)
+    console.log(filter);
+    console.log(filter.startdate.toDateString());
+    this.events?.updateFilter(filter);
+    
+    this.onClick();
   }
   @ViewChild('filters') filter: FilterSidebarComponent | undefined;
+
   onClick(){
     if(this.filter) this.filter.isClicked = false;
-    console.log(this.filter?.isClicked)
   }
   
 

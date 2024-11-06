@@ -7,8 +7,33 @@
         
     </div>
     <div class="event-container">
-        <button>bella</button>
-        filters
+        <form [formGroup]="filterForm" (ngSubmit)="submitFilters()">
+            <div>
+                <label for="type">Tipo: </label>
+                <select name="selection" id="type" formControlName="type">
+                    <option *ngFor="let t of types">{{t}}</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="target">Categoria: </label>
+                <select name="selection" id="target" formControlName="target">
+                    <option *ngFor="let t of targets">{{t}}</option>
+                </select>
+            </div>
+            <div>
+                <label for="startDate">Data di inizio: </label>
+                <input type="date" id="startDate" formControlName="startDate">
+            </div>
+            <div>
+                <label for="endDate">Data di fine: </label>
+                <input type="date" id="endDate" formControlName="endDate">
+            </div>
+            
+            <button type="submit">Conferma</button>
+        </form>
+        
+        
     </div>
 </div>
 
