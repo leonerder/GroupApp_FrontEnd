@@ -7,30 +7,36 @@ import { FilterSidebarComponent } from './filter-sidebar/filter-sidebar.componen
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
+import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-area-sidebar.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule],
+  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[
       transition(':enter',[
         style({opacity: 0}),
-        animate('0.5s ease', style({opacity: 0.2}))
+        animate('0.3s ease', style({opacity: 0.2}))
       ]),
       transition(':leave',[
         style({opacity: 0.2}),
-        animate('0.5s ease', style({opacity: 0}))
+        animate('0.3s ease', style({opacity: 0}))
       ])
-    ])
+    ]),
   ],
   styleUrl: './app.component.css'
 })
+
+
+
 export class AppComponent {
   title = 'GroupApp_frontend';
-  
+  menuToggle: 'open' | 'closed' = 'closed'  
+
+  @ViewChild('personal') personal: PersonalAreaSidebarComponent | undefined;
 
   @ViewChild('events') events: EventContainerComponent | undefined;
   onName(filter: Filter){
@@ -48,16 +54,19 @@ export class AppComponent {
   onClick(){
     if(this.filter){
       this.filter.filterClicked = this.filter.filterClicked == 'closed' ? 'open' : 'closed';
-      console.log(this.filter.filterClicked);
     }
-  
   }
   
   clickOut(){
     if(this.filter){
       this.filter.filterClicked = 'closed';
-      console.log(this.filter.filterClicked);
     }
+
+    if(this.personal?.slideToggle){
+      this.personal.slideToggle = 'closed';
+    }
+
+    this.menuToggle = 'closed'; 
   }
 
 }
