@@ -3,24 +3,45 @@ import { booleanAttribute, Component, EventEmitter, NgModule, Output } from '@an
 import { MatIcon } from '@angular/material/icon';
 import { Target, Type } from '../event-container/event-container.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-filter-sidebar',
   standalone: true,
-  imports: [MatIcon, NgClass, FormsModule, ReactiveFormsModule, NgFor],
+  imports: [MatIcon, NgClass, FormsModule, ReactiveFormsModule, NgFor,],
   templateUrl: './filter-sidebar.component.html',
+  animations: [
+    trigger('slide', [
+      state('open',
+        style({
+          transform: 'translateX(5%)'
+        })
+      ),
+      state('closed',
+        style({
+          transform: 'translateX(-90%)'
+        })
+      ),
+      transition('*=> closed', [animate('0.3s ease')]),
+      transition('*=> open', [animate('0.3s ease')]),
+    ])
+  ],
   styleUrl: './filter-sidebar.component.css'
 })
 
 export class FilterSidebarComponent {
   private clicked: boolean;
   private filter: Filter;
+  filterClicked: 'open' | 'closed' = 'closed'
 
   @Output() filter_out = new EventEmitter<Filter>();
+  @Output() click_out = new EventEmitter();
   
   types = Object.values(Type);
+  selectedType = Type.NULL;
   targets = Object.values(Target);
+  selectedTarget = Target.NULL
 
   filterForm = new FormGroup({
     endDate: new FormControl(''),
@@ -44,7 +65,7 @@ export class FilterSidebarComponent {
   }
  
   public onClick(){
-    this.clicked = !this.clicked;
+    this.click_out.emit();
   }
 
   public get isClicked(){
@@ -58,21 +79,21 @@ export class FilterSidebarComponent {
 
 
 export class Filter{
-  private _name: string | undefined;
-  private _startdate: Date | undefined;
+  private _name: string;
+  private _startdate: Date;
   
-  private _endDate: Date | undefined;
+  private _endDate: Date;
   
-  private _type: Type | undefined;
+  private _type: Type;
   
-  private _target: Target | undefined;
+  private _target: Target;
 
   constructor(name?: string, startDate?: Date, endDate?: Date, type?: Type, target?: Target){
-    this._name = name;
-    this._startdate = startDate;
-    this._endDate = endDate;
-    this._type = type;
-    this._target = target;
+    this._name = name ? name : '';
+    this._startdate = startDate ? startDate : new Date('');
+    this._endDate = endDate ? endDate : new Date('');;
+    this._type = type ? type : Type.NULL;
+    this._target = target ? target : Target.NULL;
   }
 
   public get name(){

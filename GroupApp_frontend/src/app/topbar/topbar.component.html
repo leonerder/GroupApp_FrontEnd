@@ -3,21 +3,18 @@
         <p class="element" >logo unitn</p>
         <button class="element button1" >come funziona? </button>
     </div>
-    <div class="sub-div center-div">
-        <div style="display: flex; justify-content: space-between;" class="search-container">
-            <input class="search-bar" placeholder="Cerca.." type="text" (keyup)="updateFilter()" [(ngModel)]="filter_name">
-            <span class="search-icon-background">
-                <mat-icon class="search-icon">search</mat-icon>
-            </span>
-                
-            
-            
+        <div class="sub-div center-div">
+         <div style="display: flex; justify-content: space-between;" class="search-container">
+               <input class="search-bar" placeholder="Cerca.." type="text" (keyup)="updateFilter()" [(ngModel)]="filter_name">
+               <span class="search-icon-background">
+                  <mat-icon class="search-icon">search</mat-icon>
+              </span>
         </div>
-        
     </div>
     <div class="sub-div right-div">
+        <button class="element button1">Messaggi</button>
         <button class="element button2">richieste</button>
-        <p class="element">icona profilo</p>
+        <img src="../\public\assets\posters\example-poster.jpg" alt="image" class="profile-icon">
     </div>
     
     

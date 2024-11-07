@@ -1,36 +1,39 @@
-<div class="main-container" [ngClass]="{'main-container-clicked': isClicked}" id="container">
+<div class="main-container" [@slide]="filterClicked" class="main-container" id="container">
     <div class="title-container">
-        <p class="title">filtri</p>
+        <p class="title">Filtri</p>
         <span class="filter-button" (click)="onClick()">
             <mat-icon class="icon">filter_list</mat-icon>
         </span>
         
     </div>
     <div class="event-container">
-        <form [formGroup]="filterForm" (ngSubmit)="submitFilters()">
-            <div>
-                <label for="type">Tipo: </label>
-                <select name="selection" id="type" formControlName="type">
+        <form [formGroup]="filterForm" (ngSubmit)="submitFilters()" class="filter-container">
+            <div class="field-div">
+                
+                <label for="type" class="field-label"> Tipo </label>
+                <select name="selection" id="type" formControlName="type" class="field-input" placeholder="">
                     <option *ngFor="let t of types">{{t}}</option>
                 </select>
             </div>
             
-            <div>
-                <label for="target">Categoria: </label>
-                <select name="selection" id="target" formControlName="target">
-                    <option *ngFor="let t of targets">{{t}}</option>
+            <div class="field-div">
+               
+                <label for="target" class="field-label"> Categoria </label>
+                <select name="selection" id="target" formControlName="target" class="field-input">
+                    <option *ngFor="let t of targets" [value]="t">{{t}}</option>
                 </select>
             </div>
-            <div>
-                <label for="startDate">Data di inizio: </label>
-                <input type="date" id="startDate" formControlName="startDate">
+            <div class="field-div" >
+                
+                <label for="startDate" class="field-label"> Data di inizio </label>
+                <input type="date" id="startDate" formControlName="startDate" class="field-input">
             </div>
-            <div>
-                <label for="endDate">Data di fine: </label>
-                <input type="date" id="endDate" formControlName="endDate">
+            <div class="field-div">
+                <label for="endDate" class="field-label">Data di fine</label>
+                <input type="date" id="endDate" formControlName="endDate" class="field-input"   >
             </div>
             
-            <button type="submit">Conferma</button>
+            <button type="submit" class="button2">Conferma</button>
         </form>
         
         

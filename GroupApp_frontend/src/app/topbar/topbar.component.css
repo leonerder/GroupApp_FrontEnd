@@ -31,25 +31,7 @@
     margin: 3%;
 }
 
-.button1{
-    height: 50%;
-    width: 30%;
-    max-width: 180px;
-    background-color: transparent;  
-    border: none;
-    color: var(--primary-color);
-    font-size: 100%;
-} 
 
-.button1:hover{
-    border: 2px solid var(--accent-color);
-    border-radius: 6px;
-
-}
-
-.button1:active{
-    box-shadow: inset 0px 0px 25px 4px rgba(0,0,0,0.2);
-}
 
 .search-container{
     width: 60%;
@@ -97,4 +79,13 @@
     color: var(--tertiary-color);
     outline: none;
     border: none;
+}
+
+.profile-icon{
+    border: 3px solid var(--accent-color);
+    margin-right: 15px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    cursor: pointer;
 }

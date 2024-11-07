@@ -1,9 +1,14 @@
 
+  
   <div class="background" >
-    <app-topbar (filter_out)="onName($event)" (click)="onClick()"></app-topbar>
-    <div class="app-container" >
-      <app-filter-sidebar #filters (filter_out)="onFilter($event)"></app-filter-sidebar>
-      <app-event-container #events (click)="onClick()"></app-event-container>
+    <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div>
+    <!-- <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div> -->
+    <app-topbar (filter_out)="onName($event)" ></app-topbar>
+    <div class="app-container">
+      <app-menu *ngIf="this.filter?.filterClicked=='open'"></app-menu>
+      <app-filter-sidebar #filters (filter_out)="onFilter($event)" (click_out)="onClick()"></app-filter-sidebar>
+      <app-event-container #events></app-event-container>
+      
     </div>
   </div>
   

@@ -54,8 +54,8 @@ export class EventContainerComponent {
         console.log(this.filters.startdate);
         console.log(ev.date)
         return ev.name.includes(this.filters.name) && 
-              ((this.filters.endDate ? ev.date <= this.filters.endDate : true) || 
-              (this.filters.startdate ? ev.date >= this.filters.startdate : true)) && 
+              (!isNaN(Date.parse(this.filters.endDate.toDateString())) ? ev.date <= this.filters.endDate : true) &&
+              (!isNaN(Date.parse(this.filters.startdate.toDateString())) ? ev.date >= this.filters.startdate : true) && 
               (this.filters.target ? ev.target == this.filters.target : true) && 
               (this.filters.type ? ev.type == this.filters.type : true);
       })
@@ -128,4 +128,5 @@ export enum Target{
   KIDS = "Bambini",
   TEENAGERS = "Ragazzi",
   ADULTS = "Adulti",
+  NULL = ''
 }
