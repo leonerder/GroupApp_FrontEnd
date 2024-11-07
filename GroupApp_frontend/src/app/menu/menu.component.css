@@ -12,3 +12,40 @@
     flex-direction: column;
     box-shadow: 5px 5px 0px -3px rgba(0,0,0,0.42);
 }   
+
+.title-container{
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    font-size: 20px;
+    color: var(--tertiary-color);
+    font-weight: bold;
+    margin: 0;
+}
+
+.filter-button{
+    position: absolute;
+    right: 0px;
+    height: 36px;
+    width: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-color);
+    border-radius: 5px;
+    margin: 12px;
+}
+
+.icon{
+    color: var(--tertiary-color);
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+    font-weight: bold;
+}

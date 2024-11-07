@@ -1,11 +1,11 @@
 
   
   <div class="background" >
-    <div @goDark *ngIf="this.filter?.filterClicked=='open' ||  menuToggle=='open' || this.personal?.slideToggle == 'open'" class="shield" (click)="clickOut()"></div>
+    <div @goDark *ngIf="this.filter?.filterClicked=='open' ||  this.menu?.slideToggle == 'open' || this.personal?.slideToggle == 'open'" class="shield" (click)="clickOut()"></div>
     <!-- <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div> -->
-    <app-topbar (filter_out)="onName($event)" (menu_out)="menuToggle = 'open'"></app-topbar>
+    <app-topbar (filter_out)="onName($event)" (menu_out)="this.menu.slideToggle = 'open'"></app-topbar>
     <div class="app-container">
-      <app-menu [slideToggle]="menuToggle" ></app-menu>
+      <app-menu #menu ></app-menu>
       <app-filter-sidebar #filters (filter_out)="onFilter($event)" (click_out)="onClick()"></app-filter-sidebar>
       <app-personal-area-sidebar #personal></app-personal-area-sidebar>
       <app-event-container #events></app-event-container>

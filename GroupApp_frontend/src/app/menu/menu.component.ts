@@ -1,11 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgIf } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, MatIcon],
   templateUrl: './menu.component.html',
   animations:[
     trigger('openMenu',[
@@ -22,14 +23,12 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-
-  @Input() slideToggle: 'open'|'closed' = 'closed';
+  slideToggle: 'open'|'closed' = 'closed';
 
   constructor(){
 
   }
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes)
-  }
+  
+
 
 }

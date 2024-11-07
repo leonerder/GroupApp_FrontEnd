@@ -34,7 +34,6 @@ import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-a
 
 export class AppComponent {
   title = 'GroupApp_frontend';
-  menuToggle: 'open' | 'closed' = 'closed'  
 
   @ViewChild('personal') personal: PersonalAreaSidebarComponent | undefined;
 
@@ -46,10 +45,10 @@ export class AppComponent {
     console.log(filter);
     console.log(filter.startdate.toDateString());
     this.events?.updateFilter(filter);
-    
     this.onClick();
   }
   @ViewChild('filters') filter: FilterSidebarComponent | undefined;
+  @ViewChild('menu') menu: MenuComponent | undefined;
 
   onClick(){
     if(this.filter){
@@ -66,7 +65,9 @@ export class AppComponent {
       this.personal.slideToggle = 'closed';
     }
 
-    this.menuToggle = 'closed'; 
+    if(this.menu?.slideToggle){
+      this.menu.slideToggle = 'closed'; 
+    }
   }
 
 }

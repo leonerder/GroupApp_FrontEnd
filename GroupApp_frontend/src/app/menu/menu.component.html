@@ -1,3 +1,9 @@
 <div *ngIf="slideToggle == 'open'" class="main-container" @openMenu>
-    <p>impostazioni</p>
+    <div class="title-container">
+        <p class="title">Profilo</p>
+        <span class="filter-button" (click)="slideToggle='closed'">
+            <mat-icon class="icon">close</mat-icon>
+        </span>
+    </div>
+    
 </div>
