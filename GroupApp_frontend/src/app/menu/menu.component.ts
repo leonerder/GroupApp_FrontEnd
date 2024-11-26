@@ -23,12 +23,11 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
-  slideToggle: 'open'|'closed' = 'closed';
+  slideToggle: 'open'|'closed';
 
   constructor(){
-
+    this.slideToggle = 'closed';
   }
-  
 
 
 }

@@ -1,25 +1,46 @@
-<div class="main-container">
+
+    
+
+<div class="container">
+    <mat-icon class="passive-icon">{{shown_icon}}</mat-icon>
     <div class="interaction-container">
-        <div class="info-container">
+        <div class="title-container">
             <p class="title">{{event?.name}}</p> 
-            <button class="button2">Partecipa</button></div>
-        <div class="info-container" style="height: 10%;">
-            <p class="subtitle">data:</p>
-            <p>{{event?.date?.toDateString()}}</p>
-            <p class="subtitle">luogo:</p>
-            <p>{{event?.place}}</p>
-            <p class="subtitle">tipo:</p>
-            <p>{{event?.type}}</p>
         </div>
-        <div class="info-container-description">
-            <p class="subtitle"> descrizione: </p>
-            <p> {{event?.description}}</p>
+        <div style="display: flex; justify-content: space-between;">
+            <div>
+                
+                <div class="info-container">
+                    <p class="subtitle">Quando:</p>
+                    <p>{{event?.date?.getDay()}}/{{event?.date?.getMonth()}}/{{event?.date?.getFullYear()}} - {{event?.end_date?.getDay()}}/{{event?.end_date?.getMonth()}}/{{event?.end_date?.getFullYear()}}</p>
+                </div>
+                <div class="info-container">
+                    <p class="subtitle">Dove:</p>
+                    <p>{{event?.place}}</p>
+                </div>
+                <div class="info-container">
+                    <p class="subtitle">Categoria:</p>
+                    <p>{{event?.target}}</p>
+                </div>
+                <div class="info-container">
+                    <p class="subtitle">Posti Rimasti:</p>
+                    <p>{{event?.remaining_places()}}</p>
+                </div>
+                
+            </div>
+        </div>
+        <div class="button-container">
+                <button class="button2">Partecipa</button>
+                <mat-icon class="active-icon">info</mat-icon>
         </div>
         
     </div>
     <div class="gradient"></div>
     <img src="../\public\assets\posters\example-poster.jpg" alt="poster" class="back-poster">
-    
 </div>
+    
+    
+    
+
 
 

@@ -3,7 +3,7 @@
   <div class="background" >
     <div @goDark *ngIf="this.filter?.filterClicked=='open' ||  this.menu?.slideToggle == 'open' || this.personal?.slideToggle == 'open'" class="shield" (click)="clickOut()"></div>
     <!-- <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div> -->
-    <app-topbar (filter_out)="onName($event)" (menu_out)="this.menu.slideToggle = 'open'"></app-topbar>
+    <app-topbar (filter_out)="onName($event)" (menu_out)="toggleMenu()"></app-topbar>
     <div class="app-container">
       <app-menu #menu ></app-menu>
       <app-filter-sidebar #filters (filter_out)="onFilter($event)" (click_out)="onClick()"></app-filter-sidebar>

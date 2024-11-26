@@ -19,7 +19,7 @@ export class EventContainerComponent {
   constructor(){
     this.events = [];
     this.events_shown = [];
-    this.filters = new Filter("",undefined,undefined,Type.SPORT,undefined);
+    this.filters = new Filter("",undefined,undefined,undefined,undefined);
     this.populate(); 
     this.updateName('');
     this.applyFilters();
@@ -28,8 +28,18 @@ export class EventContainerComponent {
   private populate(){    
     //da cambiare con la chiamata a backend per popolare l'array
     if(this.events){
-      this.events[0] = new Event("partitozza", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY);
-      this.events[1] = new Event("partitina", new Date(), "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS);
+      let tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.events[0] = new Event("partitozza", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY, 0, 10);
+      this.events[1] = new Event("partitina", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS, 10, 12);
+      this.events[2] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[3] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[4] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[5] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[6] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[7] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      this.events[8] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      
     }
   }
 
@@ -74,22 +84,38 @@ export class EventContainerComponent {
 export class Event{
 
   private _name: string;
-  private _date;
+  private _startDate;
+  private _endDate;
   private _place;
   private _description;
   private _type;
   private _target;
+  private _price;
+  private _maxPartecipants;
+  private _actualPartecipants;
   
   
 
-  constructor(name: string, date: Date, place: String, description: String, type: Type, target: Target){
+  constructor(name: string, start_date: Date, end_date: Date, place: String, description: String, type: Type, target: Target, price: number, maxP: number){
     
     this._name = name;
-    this._date = date;
+    this._startDate = start_date;
+    this._endDate = end_date;
     this._place = place;
     this._description = description;
     this._type = type;
     this._target = target;
+    this._price = price;
+    this._maxPartecipants = maxP;
+    this._actualPartecipants = 0;
+  }
+
+  public get price() {
+    return this._price;
+  }
+
+  public remaining_places(){
+    return this._maxPartecipants - this._actualPartecipants;
   }
 
   public get target() {
@@ -102,7 +128,10 @@ export class Event{
     return this._name;
   }
   public get date(){
-    return this._date;
+    return this._startDate;
+  }
+  public get end_date(){
+    return this._endDate;
   }
   public get place(){
     return this._place;
@@ -119,7 +148,7 @@ export class Event{
 export enum Type{
   
   SPORT = "Sport",
-  READING = "Reading",
+  CULTURA = "Cultura",
   NULL = ''
 }
 

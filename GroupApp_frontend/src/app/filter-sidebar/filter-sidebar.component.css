@@ -44,6 +44,13 @@
     font-weight: bold;
 }
 
+.active-icon{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    font-weight: bold;
+}
+
 .filter-container{
     display: flex;
     flex-direction: column;

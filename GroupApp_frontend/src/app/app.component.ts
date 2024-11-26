@@ -50,6 +50,12 @@ export class AppComponent {
   @ViewChild('filters') filter: FilterSidebarComponent | undefined;
   @ViewChild('menu') menu: MenuComponent | undefined;
 
+  toggleMenu(){
+    if(this.menu?.slideToggle){
+      this.menu.slideToggle = 'open';
+    }
+  }
+
   onClick(){
     if(this.filter){
       this.filter.filterClicked = this.filter.filterClicked == 'closed' ? 'open' : 'closed';

@@ -1,9 +1,8 @@
 <div class="main-container" [@slide]="filterClicked" class="main-container" id="container">
     <div class="title-container">
         <p class="title">Filtri</p>
-        <span class="filter-button" (click)="onClick()">
-            <mat-icon class="icon">filter_list</mat-icon>
-        </span>
+        <mat-icon class="active-icon" (click)="onClick()" >filter_list</mat-icon>
+        
         
     </div>
     <div class="event-container">
