@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { EventcardComponent } from '../eventcard/eventcard.component';
 import { NgFor } from '@angular/common';
 import { Filter } from '../topbar/topbar.component';
@@ -12,6 +12,8 @@ import { Filter } from '../topbar/topbar.component';
 })
 
 export class EventContainerComponent {
+
+  @Output() event_out = new EventEmitter<Event>();
 
   private filters: Filter;
   private events: Event[] | null;
@@ -75,6 +77,10 @@ export class EventContainerComponent {
 
   public get event_list(){
     return this.events_shown;
+  }
+
+  emit(e: Event){
+    this.event_out.emit(e);
   }
 
 

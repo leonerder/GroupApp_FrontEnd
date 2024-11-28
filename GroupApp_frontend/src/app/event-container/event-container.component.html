@@ -1,7 +1,7 @@
 
 <div class="main">
     <div class="eventback">
-    <app-eventcard *ngFor="let e of event_list" [event]="e"></app-eventcard>
+    <app-eventcard *ngFor="let e of event_list" [event]="e" (event_out)="emit($event)"></app-eventcard>
     <div class="bottom-div">
         <button class="button2">Carica Altro</button>
     </div>

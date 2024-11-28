@@ -1,19 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TopbarComponent } from './topbar/topbar.component';
-import { EventContainerComponent } from './event-container/event-container.component';
+import { Event, EventContainerComponent } from './event-container/event-container.component';
 import { Filter } from './topbar/topbar.component';
 import { FilterSidebarComponent } from './filter-sidebar/filter-sidebar.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-area-sidebar.component';
+import { EventPageComponent } from './event-page/event-page.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent],
+  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[
@@ -48,7 +49,20 @@ export class AppComponent {
     this.onClick();
   }
   @ViewChild('filters') filter: FilterSidebarComponent | undefined;
+
   @ViewChild('menu') menu: MenuComponent | undefined;
+
+  @ViewChild('eventInfo') eventInfo: EventPageComponent | undefined;
+
+  moreInfo(e: Event){
+    if(this.eventInfo){
+      this.eventInfo.event = e;
+      this.eventInfo.isOpen = 'open';
+    }
+    
+  }
+
+
 
   toggleMenu(){
     if(this.menu?.slideToggle){
@@ -74,6 +88,11 @@ export class AppComponent {
     if(this.menu?.slideToggle){
       this.menu.slideToggle = 'closed'; 
     }
+
+    if(this.eventInfo){
+      this.eventInfo.isOpen = 'closed'
+    }
+    ;
   }
 
 }

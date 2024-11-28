@@ -1,0 +1,52 @@
+<div class="main-container" *ngIf="isOpen == 'open'" @openEvent>
+    <div>
+        <p class="title">{{event?.name}}</p>
+    </div>
+    <div class="horizontal">
+        <div class="left">
+            <div class="horizontal" style="height: 30%;">
+                <span class="text-box">
+                   <p class="subtitle">luogo:</p> 
+                   <p>{{event?.place}}</p>
+                </span>
+                
+                <span class="text-box">
+                   <p class="subtitle">data:</p> 
+                   <p>{{event?.date?.getDay()}}/{{event?.date?.getMonth()}}/{{event?.date?.getFullYear()}} - {{event?.end_date?.getDay()}}/{{event?.end_date?.getMonth()}}/{{event?.end_date?.getFullYear()}}</p>
+                </span>
+                
+                <span class="text-box">
+                    <p class="subtitle">target:</p>
+                    <p>{{event?.target}}</p>
+                </span>
+                
+                <span class="text-box">
+                    <p class="subtitle">posti rimanenti:</p>
+                    <p>{{event?.remaining_places()}}</p>
+                </span>
+                
+                <span class="text-box">
+                    <p class="subtitle">prezzo:</p>
+                    <p>{{event?.price == 0 ? 'Gratis' : event?.price + "€"}}</p>
+                </span>
+            </div>
+    
+            <div >
+                <p class="subtitle">descrizione</p>
+                <p>{{event?.description}}</p>
+            </div>
+    
+            <div>
+                <p class="subtitle">più infomrazioni</p>
+            </div>
+    
+        </div>
+        
+        <div>
+            <img src="../\public\assets\posters\example-poster.jpg" alt="locandina" class="poster">
+        </div>
+
+
+    </div>
+    
+</div>

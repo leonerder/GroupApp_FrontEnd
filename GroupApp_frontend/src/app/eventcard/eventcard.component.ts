@@ -1,4 +1,4 @@
-import { Component, Input, Optional } from '@angular/core';
+import { Component, EventEmitter, Input, Optional, Output } from '@angular/core';
 import { Event } from '../event-container/event-container.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatIcon } from '@angular/material/icon';
@@ -12,9 +12,10 @@ import { MatIcon } from '@angular/material/icon';
 })
 
 export class EventcardComponent {
-  @Input() 
-  event: Event | undefined;
+  @Input() event: Event | undefined;
 
+  @Output() event_out = new EventEmitter<Event>();
+  
   shown_icon: string = "question_mark";
 
   ngOnInit(){
@@ -37,6 +38,11 @@ export class EventcardComponent {
         break;
       }
     }
+  }
+
+  emit_event(){
+    console.log(this.event);
+    this.event_out.emit(this.event);
   }
 }
 

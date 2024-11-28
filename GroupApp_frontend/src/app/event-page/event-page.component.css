@@ -1,0 +1,56 @@
+.main-container{
+    left: 10%;
+    width: 80%;
+}
+
+.horizontal{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.left{
+    width: 70%;
+    padding: 3%;
+}
+
+.right{
+    width: 30%;
+}
+
+.poster{
+    height: 45vh;
+    width: 30vh;
+    object-fit: contain;
+    background-color: var(--accent-color);
+    border-radius: 12px;
+    border: 1px solid var(--tertiary-color);
+}
+.poster:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+
+.title{
+    font-weight: bold;
+    font-size: 30px;
+    color: var(--tertiary-color);
+    margin: 2%;
+}
+
+.subtitle{
+    font-weight: bold;
+    font-size: 18px;
+    color: var(--secondary-color);
+}
+p{
+    color: var(--tertiary-color);
+    margin: 10px;
+}
+
+.text-box{
+    display: flex;
+    align-items: center;
+    height: 2vh;
+    min-width: 30%;
+}

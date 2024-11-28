@@ -9,7 +9,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 @Component({
   selector: 'app-filter-sidebar',
   standalone: true,
-  imports: [MatIcon, NgClass, FormsModule, ReactiveFormsModule, NgFor,],
+  imports: [MatIcon, FormsModule, ReactiveFormsModule, NgFor,],
   templateUrl: './filter-sidebar.component.html',
   animations: [
     trigger('slide', [
