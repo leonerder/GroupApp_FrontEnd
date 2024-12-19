@@ -2,7 +2,11 @@
     <div class="title-container">
         <p class="title">Area Personale</p>
         <mat-icon class="active-icon" (click)="onClick()">calendar_today</mat-icon>
-        
     </div>
-    personal area
+    <p class="subtitle">Partecipa</p>
+    <div class="myEventsContainer">
+        <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+    </div>
+    <p class="subtitle">organizza</p>
+    
 </div>

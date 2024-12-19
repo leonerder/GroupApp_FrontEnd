@@ -10,6 +10,8 @@
     --tertiary-color: #002b44;
     --accent-color: #ecad38;
 
+    
+
 }
 
 body{
@@ -98,7 +100,21 @@ div{
 
 p{
     color: var(--primary-color);
+    margin: 0px;
+}
+
+.subtitle{
+    color: var(--tertiary-color);
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+
+.title{
+    color: var(--tertiary-color);
+    font-size: 24px;
+    font-weight: bold;
+    
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

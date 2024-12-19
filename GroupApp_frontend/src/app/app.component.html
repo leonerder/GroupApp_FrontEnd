@@ -7,9 +7,9 @@
     <div class="app-container">
       <app-menu #menu ></app-menu>
       <app-filter-sidebar #filters (filter_out)="onFilter($event)" (click_out)="onClick()"></app-filter-sidebar>
-      <app-personal-area-sidebar #personal></app-personal-area-sidebar>
+      <app-personal-area-sidebar (eventInfo)="moreInfo($event)" #personal></app-personal-area-sidebar>
       <app-event-page #eventInfo></app-event-page>
-      <app-event-container #events (event_out)="moreInfo($event)"></app-event-container>
+      <app-event-container #events (event_out)="moreInfo($event) "></app-event-container>
       <!-- add ngswitch for requests -->
     </div>
   </div>

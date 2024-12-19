@@ -81,13 +81,9 @@
     border: none;
 }
 
-.profile-icon{
-    border: 3px solid var(--accent-color);
+.active-icon{
     margin-right: 15px;
-    height: 50px;
-    width: 50px;
-    border-radius: 100px;
-    cursor: pointer;
+    transform: scale(1.5);
 }
 
 .home-button{

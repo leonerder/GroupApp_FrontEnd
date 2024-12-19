@@ -1,0 +1,10 @@
+<div class="container"  (mouseenter)="toggleInfo()" (mouseleave)="toggleInfo()">
+    <div class="interaction-container">
+        <p class="title">
+            {{event?.name}}
+        </p>
+        <mat-icon *ngIf="showInfo" class="active-icon" (click)="eventInfo.emit(event)" @infoButton>info</mat-icon>
+    </div>
+    <div class="gradient"></div>
+    <img src="../\public\assets\posters\example-poster.jpg" alt="poster" class="back-poster">
+</div>

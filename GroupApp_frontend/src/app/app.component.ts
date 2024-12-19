@@ -55,6 +55,7 @@ export class AppComponent {
   @ViewChild('eventInfo') eventInfo: EventPageComponent | undefined;
 
   moreInfo(e: Event){
+    this.clickOut();
     if(this.eventInfo){
       this.eventInfo.event = e;
       this.eventInfo.isOpen = 'open';
