@@ -22,7 +22,7 @@ export class EventContainerComponent {
     this.events = [];
     this.events_shown = [];
     this.filters = new Filter("",undefined,undefined,undefined,undefined);
-    this.populate(); 
+    this.populate();
     this.updateName('');
     this.applyFilters();
   }
@@ -30,18 +30,19 @@ export class EventContainerComponent {
   private populate(){    
     //da cambiare con la chiamata a backend per popolare l'array
     if(this.events){
-      let tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      this.events[0] = new Event("partitozza", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY, 0, 10);
-      this.events[1] = new Event("partitina", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS, 10, 12);
-      this.events[2] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[3] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[4] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[5] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[6] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[7] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[8] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      
+      fetch('http://localhost:3000/eventi?price=701&date="2026-11-19"')
+        .then( res => {
+          if(res.ok){
+            return res.json();
+          } else {
+            throw new Error('API request failed');
+          }
+        })
+        .then(data => {
+          for(const e of data){
+            this.events?.push(new Event(e.title, new Date(), new Date('2026-01-01'), e.location, "", Type.SPORT, Target.FAMILY, e.price, 100));
+            }
+        })
     }
   }
 
@@ -76,7 +77,7 @@ export class EventContainerComponent {
   }
 
   public get event_list(){
-    return this.events_shown;
+    return this.events;
   }
 
   emit(e: Event){
