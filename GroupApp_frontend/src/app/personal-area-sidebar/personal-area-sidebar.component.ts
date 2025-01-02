@@ -23,6 +23,20 @@ import { NgFor } from '@angular/common';
       ),
       transition('*=> closed', [animate('0.3s ease')]),
       transition('*=> open', [animate('0.3s ease')]),
+    ]),
+    trigger('create', [
+      state('open',
+        style({
+          transform: 'rotate(-225deg)'
+        })
+      ),
+      state('closed',
+        style({
+          transform: 'rotate(0deg)'
+        })
+      ),
+      transition('*=> closed', [animate('0.5s ease')]),
+      transition('*=> open', [animate('0.5s ease')]),
     ])
   ],
   templateUrl: './personal-area-sidebar.component.html',
@@ -34,6 +48,8 @@ export class PersonalAreaSidebarComponent {
   @Output() eventInfo = new EventEmitter<Event>();
 
   myEvents: Event[] | undefined = []; 
+
+  openCreateMenu: 'open' | 'closed' = 'closed';
 
   constructor(){
     if(this.myEvents){
@@ -53,5 +69,9 @@ export class PersonalAreaSidebarComponent {
 
   onClick(){
     this.slideToggle = this.slideToggle == 'open' ? 'closed' : 'open';
+  }
+
+  openMenu(){
+    this.openCreateMenu = this.openCreateMenu == 'open' ? 'closed' : 'open';
   }
 }

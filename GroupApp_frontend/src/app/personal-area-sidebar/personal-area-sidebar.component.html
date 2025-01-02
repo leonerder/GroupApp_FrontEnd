@@ -7,6 +7,19 @@
     <div class="myEventsContainer">
         <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
     </div>
-    <p class="subtitle">organizza</p>
+    <p class="subtitle">Organizza</p>
+    <div class="myEventsContainer">
+        <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+    </div>
+    
+    <button class="createEventButton" (click)="openMenu()">
+        <div class="cross-container">
+            <div class="cross-vertical" [@create]="openCreateMenu"></div>
+            <div class="cross-horizontal" [@create]="openCreateMenu"></div>
+        </div>
+        
+    </button>
+    
+    <div class="white-space"></div>
     
 </div>

@@ -43,6 +43,9 @@ export class EventContainerComponent {
             this.events?.push(new Event(e.title, new Date(), new Date('2026-01-01'), e.location, "", Type.SPORT, Target.FAMILY, e.price, 100));
             }
         })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 

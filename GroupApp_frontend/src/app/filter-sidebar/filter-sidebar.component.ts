@@ -64,6 +64,9 @@ export class FilterSidebarComponent {
     this.filter_out.emit(this.filter);
   }
  
+  public resetFilter(){
+    this.filterForm.reset();  
+  }
   public onClick(){
     this.click_out.emit();
   }

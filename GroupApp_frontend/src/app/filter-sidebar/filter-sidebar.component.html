@@ -22,17 +22,25 @@
                     <option *ngFor="let t of targets" [value]="t">{{t}}</option>
                 </select>
             </div>
+
             <div class="field-div" >
                 
                 <label for="startDate" class="field-label"> Data di inizio </label>
                 <input type="date" id="startDate" formControlName="startDate" class="field-input">
             </div>
+
             <div class="field-div">
                 <label for="endDate" class="field-label">Data di fine</label>
                 <input type="date" id="endDate" formControlName="endDate" class="field-input"   >
             </div>
             
+            <div class="field-div">
+                <label for="budget" class="field-label">budget</label>
+                <input type="range" min="0" max="1000" value="0" id="budget" formControlName="endDate" class="field-input"   >
+            </div>
+
             <button type="submit" class="button2">Conferma</button>
+            <button class="button1" (click)="resetFilter()">reset</button>
         </form>
         
         

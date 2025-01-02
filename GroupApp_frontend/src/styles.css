@@ -48,14 +48,17 @@ div{
     height: 50%;
     width: 30%;
     max-width: 180px;
-    background-color: transparent;  
+    background-color: var(--tertiary-color);
     border: none;
     color: var(--primary-color);
     font-size: 100%;
     cursor: pointer;
+    border-radius: 6px;
+    margin: 2px;
 } 
 
 .button1:hover{
+    margin: 0;
     border: 2px solid var(--accent-color);
     border-radius: 6px;
 
