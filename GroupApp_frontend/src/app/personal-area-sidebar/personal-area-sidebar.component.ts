@@ -53,20 +53,20 @@ export class PersonalAreaSidebarComponent {
 
   constructor(){
     if(this.myEvents){
-    let tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-      this.myEvents[0] = new Event("partitozza", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY, 0, 10);
-      this.myEvents[1] = new Event("partitina", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS, 10, 12);
-      this.myEvents[2] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[3] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[4] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[5] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[6] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[7] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.myEvents[8] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+      let ev = new Event();
+            ev.name = 'Partita';
+            ev.date = new Date();
+            ev.place = 'ez';
+            ev.description = 'vieni susu';
+            ev.type = Type.CULTURA;
+            ev.target = Target.ADULTS;
+            ev.price = 0;
+            ev.maxPartecipants = 100;
+            ev.actualPartecipants = 0;
+            this.myEvents.push(ev);
     }
-    }
-
+  }
+  
   onClick(){
     this.slideToggle = this.slideToggle == 'open' ? 'closed' : 'open';
   }

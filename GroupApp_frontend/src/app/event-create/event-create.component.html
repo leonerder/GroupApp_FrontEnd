@@ -1,0 +1,55 @@
+<div *ngIf="isOpen==true" class="main-container" [@slide] = "isOpen">
+    <div class="title-container">
+        <p class="title">Crea Evento</p>
+        <mat-icon class="active-icon" (click)="close()">close</mat-icon>
+    </div>
+
+    <div class="left-form">
+        <form [formGroup]="eventForm" (ngSubmit)="submitDraft()" class="filter-container">
+            <div class="field-div">
+                
+                <label for="name" class="field-label"> Nome </label>
+                <input type="text" name="name" id="name" formControlName="name" class="field-input" placeholder="">
+            </div>
+            
+            
+            
+            <div class="field-div">
+                
+                <label for="type" class="field-label"> Tipo </label>
+                <select name="selection" id="type" formControlName="type" class="field-input" placeholder="">
+                    <option *ngFor="let t of types">{{t}}</option>
+                </select>
+            </div>
+            <p class="red-info">data non valida  </p>
+            
+            <div class="field-div">
+               
+                <label for="target" class="field-label">Età Consigliata</label>
+                <select name="selection" id="target" formControlName="target" class="field-input">
+                    <option *ngFor="let t of targets" [value]="t">{{t}}</option>
+                </select>
+            </div>
+
+            <div class="field-div" >
+                
+                <label for="startDate" class="field-label"> Data di inizio </label>
+                <input type="date" id="startDate" formControlName="startDate" class="field-input">
+            </div>
+            
+            <div class="field-div">
+                <label for="price" class="field-label">prezzo</label>
+                <input type="number" value="0" id="price" formControlName="price" class="field-input"   >
+            </div>
+
+            <div class="field-div">
+                
+                <label for="name" class="field-label"> descrizione </label>
+                <textarea name="description" id="description" formControlName="description" class="field-input" placeholder=""></textarea>
+            </div>
+
+            <button type="submit" class="button2">Conferma</button> 
+        </form>
+    </div>
+
+</div>

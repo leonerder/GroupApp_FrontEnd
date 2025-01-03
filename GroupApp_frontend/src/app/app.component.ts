@@ -9,12 +9,13 @@ import { CommonModule } from '@angular/common';
 import { MenuComponent } from './menu/menu.component';
 import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-area-sidebar.component';
 import { EventPageComponent } from './event-page/event-page.component';
+import { EventCreateComponent } from './event-create/event-create.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent],
+  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[
@@ -44,7 +45,7 @@ export class AppComponent {
   }
   onFilter(filter: Filter){
     console.log(filter);
-    console.log(filter.startdate.toDateString());
+    console.log(filter.date.toDateString());
     this.events?.updateFilter(filter);
     this.onClick();
   }
@@ -53,6 +54,8 @@ export class AppComponent {
   @ViewChild('menu') menu: MenuComponent | undefined;
 
   @ViewChild('eventInfo') eventInfo: EventPageComponent | undefined;
+
+  @ViewChild('create') create: EventCreateComponent | undefined;
 
   moreInfo(e: Event){
     this.clickOut();

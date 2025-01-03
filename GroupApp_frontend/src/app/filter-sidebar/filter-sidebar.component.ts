@@ -1,7 +1,7 @@
 import { NgClass, NgFor } from '@angular/common';
 import { booleanAttribute, Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { Target, Type } from '../event-container/event-container.component';
+import { Event, Target, Type } from '../event-container/event-container.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
@@ -41,7 +41,9 @@ export class FilterSidebarComponent {
   types = Object.values(Type);
   selectedType = Type.NULL;
   targets = Object.values(Target);
-  selectedTarget = Target.NULL
+  selectedTarget = Target.NULL;
+
+  event: Event = new Event();
 
   filterForm = new FormGroup({
     endDate: new FormControl(''),
@@ -58,9 +60,9 @@ export class FilterSidebarComponent {
   public submitFilters(){
     this.filter.type = this.filterForm.value.type as Type;
     this.filter.target = this.filterForm.value.target as Target;
-    this.filter.startdate = new Date(Date.parse(this.filterForm.value.startDate as string));
+    this.filter.date = new Date(Date.parse(this.filterForm.value.startDate as string));
     this.filter.endDate = new Date(Date.parse(this.filterForm.value.endDate as string));
-    console.log(this.filter.startdate.toDateString());
+    console.log(this.filter.date.toDateString());
     this.filter_out.emit(this.filter);
   }
  
@@ -106,10 +108,10 @@ export class Filter{
   public set name(n: string){
     this._name=n;
   }
-  public get startdate(){
+  public get date(){
     return this._startdate as Date;
   }
-  public set startdate(value: Date) {
+  public set date(value: Date) {
     this._startdate = value;
   }
   public get endDate(): Date {

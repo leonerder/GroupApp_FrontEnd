@@ -40,8 +40,18 @@ export class EventContainerComponent {
         })
         .then(data => {
           for(const e of data){
-            this.events?.push(new Event(e.title, new Date(), new Date('2026-01-01'), e.location, "", Type.SPORT, Target.FAMILY, e.price, 100));
-            }
+            let ev = new Event();
+            ev.name = e.title;
+            ev.date = e.date;
+            ev.place = e.location;
+            ev.description = e.description;
+            ev.type = e.type;
+            ev.target = e.target;
+            ev.price = e.price;
+            ev.maxPartecipants = 100;
+            ev.actualPartecipants = 0;
+            this.events?.push(ev);
+          } 
         })
         .catch(err => {
           console.log(err);
@@ -55,7 +65,7 @@ export class EventContainerComponent {
   }
 
   public updateFilter(filter: Filter){
-    this.filters.startdate = filter.startdate;
+    this.filters.date = filter.date;
     this.filters.endDate = filter.endDate;
     this.filters.type = filter.type;
     this.filters.target = filter.target;
@@ -67,11 +77,11 @@ export class EventContainerComponent {
     if(this.events){
       this.events_shown = this.events
       this.events_shown = this.events.filter((ev) => {
-        console.log(this.filters.startdate);
-        console.log(ev.date)
+        console.log(this.filters.date);
+        console.log(ev.date);
         return ev.name.includes(this.filters.name) && 
               (!isNaN(Date.parse(this.filters.endDate.toDateString())) ? ev.date <= this.filters.endDate : true) &&
-              (!isNaN(Date.parse(this.filters.startdate.toDateString())) ? ev.date >= this.filters.startdate : true) && 
+              (!isNaN(Date.parse(this.filters.date.toDateString())) ? ev.date >= this.filters.date : true) && 
               (this.filters.target ? ev.target == this.filters.target : true) && 
               (this.filters.type ? ev.type == this.filters.type : true);
       })
@@ -95,7 +105,6 @@ export class Event{
 
   private _name: string;
   private _startDate;
-  private _endDate;
   private _place;
   private _description;
   private _type;
@@ -103,25 +112,53 @@ export class Event{
   private _price;
   private _maxPartecipants;
   private _actualPartecipants;
+
+  
   
   
 
-  constructor(name: string, start_date: Date, end_date: Date, place: String, description: String, type: Type, target: Target, price: number, maxP: number){
+  constructor(){
     
-    this._name = name;
-    this._startDate = start_date;
-    this._endDate = end_date;
-    this._place = place;
-    this._description = description;
-    this._type = type;
-    this._target = target;
-    this._price = price;
-    this._maxPartecipants = maxP;
+    this._name = '' ;
+    this._startDate = new Date();
+    this._place = '';
+    this._description = '';
+    this._type = Type.NULL;
+    this._target =Target.NULL;
+    this._price = 0;
+    this._maxPartecipants = 0;
     this._actualPartecipants = 0;
   }
 
   public get price() {
     return this._price;
+  }
+
+  public set type(value) {
+    this._type = value;
+  }
+  public set description(value) {
+    this._description = value;
+  }
+  public set place(value) {
+    this._place = value;
+  }
+  public set price(value) {
+    this._price = value;
+  }
+  
+  public get maxPartecipants() {
+    return this._maxPartecipants;
+  }
+  public set maxPartecipants(value) {
+    this._maxPartecipants = value;
+  }
+  
+  public get actualPartecipants() {
+    return this._actualPartecipants;
+  }
+  public set actualPartecipants(value) {
+    this._actualPartecipants = value;
   }
 
   public remaining_places(){
@@ -137,12 +174,18 @@ export class Event{
   public get name() {
     return this._name;
   }
-  public get date(){
+
+  public set name(value: string) {
+    this._name = value;
+  }
+  
+  public get date() {
     return this._startDate;
   }
-  public get end_date(){
-    return this._endDate;
+  public set date(value) {
+    this._startDate = value;
   }
+  
   public get place(){
     return this._place;
   }

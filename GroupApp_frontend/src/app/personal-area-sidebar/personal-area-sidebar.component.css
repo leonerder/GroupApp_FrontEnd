@@ -1,5 +1,5 @@
 .main-container{
-    right: 5px;
+    right: 1vw;
 }
 
 .active-icon{
@@ -22,14 +22,17 @@
     overflow: scroll;
     scrollbar-width: none;
     scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 20%;
+}
 
-    height: 41vh;
-    
+.myEventsContainer:hover{
+    height: 80%;
 }
 
 .title-container{
     height: 13vh;
-    
+    padding-bottom: 3vh;
     position: relative;
     display: flex;
     align-items: center;
