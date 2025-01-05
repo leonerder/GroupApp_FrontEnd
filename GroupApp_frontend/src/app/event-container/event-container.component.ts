@@ -42,7 +42,7 @@ export class EventContainerComponent {
           for(const e of data){
             let ev = new Event();
             ev.name = e.title;
-            ev.date = e.date;
+            ev.date = new Date(e.date);
             ev.place = e.location;
             ev.description = e.description;
             ev.type = e.type;
@@ -51,11 +51,13 @@ export class EventContainerComponent {
             ev.maxPartecipants = 100;
             ev.actualPartecipants = 0;
             this.events?.push(ev);
-          } 
+          }
         })
         .catch(err => {
           console.log(err);
         })
+
+        console.log(this.events);
     }
   }
 
@@ -73,7 +75,6 @@ export class EventContainerComponent {
   }
 
   public applyFilters(){
-    
     if(this.events){
       this.events_shown = this.events
       this.events_shown = this.events.filter((ev) => {
@@ -86,7 +87,7 @@ export class EventContainerComponent {
               (this.filters.type ? ev.type == this.filters.type : true);
       })
     }
-    console.log(this.events_shown);
+    console.log(this.events);
   }
 
   public get event_list(){

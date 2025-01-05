@@ -15,7 +15,7 @@ import { PDFDocument } from 'pdf-lib';
   animations: [
     trigger('slide',[
       transition(':enter',[
-        style({transform: 'translateY(100%)'}),
+        style({transform: 'translateY(120%)'}),
         animate('0.3s ease', style({transform: 'translateY(0%)'}))
       ]),
       transition(':leave',[
@@ -50,7 +50,7 @@ export class EventCreateComponent {
     })
 
   constructor(){
-    this.isOpen = true;
+    this.isOpen =false;
   }
 
   close(){
@@ -61,6 +61,18 @@ export class EventCreateComponent {
     this.err = '';
     this.valErr = false;
     if(this.eventForm.valid){
+      let event = new Event();
+      event.name = this.eventForm.value.name ? this.eventForm.value.name : '';
+      event.date = this.eventForm.value.startDate ? new Date(this.eventForm.value.startDate) : new Date('');
+      event.place = this.eventForm.value.place ? this.eventForm.value.place : '';
+      event.type = this.eventForm.value.type ? this.eventForm.value.type : Type.NULL;
+      event.target = this.eventForm.value.target ? this.eventForm.value.target : Target.NULL;
+      event.price = this.eventForm.value.price ? this.eventForm.value.price : 0;
+      event.description = this.eventForm.value.description ? this.eventForm.value.description : '';
+      event.maxPartecipants = this.eventForm.value.maxPartecipants ? this.eventForm.value.maxPartecipants : 0;
+      event.actualPartecipants = 0;
+
+      console.log(event);
 
     } else {
       console.log('tutti i campi sono obbligatori');

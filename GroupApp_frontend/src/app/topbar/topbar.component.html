@@ -15,7 +15,7 @@
     </div>
     <div class="sub-div right-div">
         <button class="element button1">Messaggi</button>
-        <button class="element button2">richieste</button>
+        <button class="element button2" (click)="switchRequest.emit()">richieste</button>
         <mat-icon class="active-icon" (click)="this.menu_out.emit()">manage_accounts</mat-icon>
     </div>
     

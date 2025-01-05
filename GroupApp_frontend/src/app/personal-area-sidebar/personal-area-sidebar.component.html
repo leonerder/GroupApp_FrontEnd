@@ -11,6 +11,8 @@
     <div class="myEventsContainer">
         <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
     </div>
+
+    <button *ngIf="openCreateMenu=='open'" class="create-event button2" (click)="eventCreate.emit(); openMenu()">Crea Evento</button>
     
     <button class="createEventButton" (click)="openMenu()">
         <div class="cross-container">

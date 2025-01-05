@@ -3,12 +3,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { EventcardReducedComponent } from '../eventcard-reduced/eventcard-reduced.component';
 import { Event, Target, Type } from '../event-container/event-container.component';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-personal-area-sidebar',
   standalone: true,
-  imports: [MatIcon, NgFor, EventcardReducedComponent],
+  imports: [MatIcon, NgFor, NgIf, EventcardReducedComponent],
   animations: [
     trigger('slide', [
       state('open',
@@ -46,6 +46,7 @@ export class PersonalAreaSidebarComponent {
   @Input() slideToggle: 'open' | 'closed' = 'closed';
 
   @Output() eventInfo = new EventEmitter<Event>();
+  @Output() eventCreate = new EventEmitter();
 
   myEvents: Event[] | undefined = []; 
 
@@ -74,4 +75,5 @@ export class PersonalAreaSidebarComponent {
   openMenu(){
     this.openCreateMenu = this.openCreateMenu == 'open' ? 'closed' : 'open';
   }
+
 }

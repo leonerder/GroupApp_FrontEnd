@@ -13,6 +13,7 @@ import { Filter } from '../filter-sidebar/filter-sidebar.component';
 export class TopbarComponent {
 
   @Output() filter_out = new EventEmitter<Filter>();
+  @Output() switchRequest = new EventEmitter();
   @Output() menu_out = new EventEmitter();
   filter: Filter = new Filter();
   filter_name = this.filter.name;

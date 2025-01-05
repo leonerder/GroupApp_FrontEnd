@@ -26,10 +26,6 @@
     height: 20%;
 }
 
-.myEventsContainer:hover{
-    height: 80%;
-}
-
 .title-container{
     height: 13vh;
     padding-bottom: 3vh;
@@ -119,4 +115,11 @@
 .subtitle{
     margin: 1vw;
     font-weight: bold;
+}
+
+.create-event{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20%;
 }

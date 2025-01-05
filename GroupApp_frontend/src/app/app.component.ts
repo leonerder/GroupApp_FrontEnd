@@ -40,9 +40,17 @@ export class AppComponent {
   @ViewChild('personal') personal: PersonalAreaSidebarComponent | undefined;
 
   @ViewChild('events') events: EventContainerComponent | undefined;
+
+  requests = false;
+
+  switchRequest(){
+    this.requests = !this.requests;
+  }
+
   onName(filter: Filter){
     this.events?.updateName(filter.name);
   }
+  
   onFilter(filter: Filter){
     console.log(filter);
     console.log(filter.date.toDateString());
@@ -57,6 +65,7 @@ export class AppComponent {
 
   @ViewChild('create') create: EventCreateComponent | undefined;
 
+
   moreInfo(e: Event){
     this.clickOut();
     if(this.eventInfo){
@@ -66,7 +75,12 @@ export class AppComponent {
     
   }
 
-
+  openCreate(){
+    this.clickOut();
+    if(this.create){
+      this.create.isOpen = true;
+    }
+  }
 
   toggleMenu(){
     if(this.menu?.slideToggle){
@@ -81,6 +95,10 @@ export class AppComponent {
   }
   
   clickOut(){
+    if(this.create){
+      this.create.isOpen = false;
+    }
+
     if(this.filter){
       this.filter.filterClicked = 'closed';
     }
@@ -96,7 +114,6 @@ export class AppComponent {
     if(this.eventInfo){
       this.eventInfo.isOpen = 'closed'
     }
-    ;
   }
 
 }
