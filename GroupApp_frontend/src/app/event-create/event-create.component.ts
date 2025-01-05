@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { Event, Target, Type } from '../event-container/event-container.component';
+import { PDFDocument } from 'pdf-lib';
+
 
 @Component({
   selector: 'app-event-create',
@@ -33,6 +35,9 @@ export class EventCreateComponent {
   selectedTarget = Target.NULL;
   ev: Event = new Event();
 
+  valErr: boolean = false;
+  err: string = '';
+
   eventForm = new FormGroup({
       name: new FormControl(this.ev.name, Validators.required),
       startDate: new FormControl(this.ev.date,Validators.required),
@@ -53,9 +58,52 @@ export class EventCreateComponent {
   }
 
   submitDraft(){
-    this.ev.actualPartecipants = 0;
+    this.err = '';
+    this.valErr = false;
+    if(this.eventForm.valid){
+
+    } else {
+      console.log('tutti i campi sono obbligatori');
+      this.err += 'attenzione, tutti i campi sono obbligatori';
+      this.valErr = true;
+    }
     
 
+  }
+
+
+  async savePdf(){
+    const url = 'assets/file/M0608_agg.pdf';  // Modifica con il percorso del tuo file PDF
+
+    // Carica il PDF esistente come array di byte
+    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+
+    // Carica il documento PDF con pdf-lib
+    const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
+    // Ottieni il modulo del PDF
+    const form = pdfDoc.getForm();
+
+    const fieldNames = form.getFields().map(field => field.getName());
+    console.log(fieldNames);
+
+    // Modifica i campi del modulo
+    form.getTextField('2').setText('Mario Rossi');  // Modifica il campo "nome"
+    form.getTextField('3').setText('Via Roma 123');  // Modifica il campo "indirizzo"
+    
+    // Puoi aggiungere altre modifiche, come la compilazione di altri campi, se presenti
+    
+    // Salva il PDF modificato
+    const pdfBytes = await pdfDoc.save();
+
+    // Crea un blob dal PDF modificato
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+
+    // Crea un link per il download
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'modificato_copia.pdf';  // Nome della copia modificata
+    link.click();
   }
 
 }
