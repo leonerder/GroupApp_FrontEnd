@@ -14,9 +14,11 @@
         </div>
     </div>
     <div class="sub-div right-div">
-        <button class="element button1">Messaggi</button>
-        <button class="element button2" (click)="switchRequest.emit()">richieste</button>
-        <mat-icon class="active-icon" (click)="this.menu_out.emit()">manage_accounts</mat-icon>
+        <button *ngIf="user?.isAdmin" class="element button2" (click)="switchRequest.emit()">richieste</button>
+        <div [ngSwitch]="user" class="button-container">
+            <mat-icon *ngSwitchCase="undefined" class="active-icon" (click)="this.menu_out.emit()">manage_accounts</mat-icon>
+            <button *ngSwitchDefault class="button2">Accedi</button>
+        </div>
     </div>
     
     

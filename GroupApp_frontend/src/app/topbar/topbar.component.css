@@ -102,3 +102,11 @@
 
     height: 80px;
 }
+
+
+.button-container{
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-area-sidebar.component';
 import { EventPageComponent } from './event-page/event-page.component';
 import { EventCreateComponent } from './event-create/event-create.component';
+import { exitCode } from 'node:process';
 
 
 @Component({
@@ -36,6 +37,8 @@ import { EventCreateComponent } from './event-create/event-create.component';
 
 export class AppComponent {
   title = 'GroupApp_frontend';
+
+  user: User | undefined;
 
   @ViewChild('personal') personal: PersonalAreaSidebarComponent | undefined;
 
@@ -114,6 +117,69 @@ export class AppComponent {
     if(this.eventInfo){
       this.eventInfo.isOpen = 'closed'
     }
+  }
+
+}
+
+export class User {
+  _email: string;
+  _name: string;
+  _lastname: string;
+  _birthdate: Date;
+  _token: string;
+  _isAdmin: boolean;
+  
+
+  constructor(em: string, n: string, l: string, d: Date, t: string, a: boolean){
+    this._email = em;
+    this._name = n;
+    this._lastname = l;
+    this._birthdate = d;
+    this._token = t;
+    this._isAdmin = a;
+  }
+
+  
+  public get email(): string {
+    return this._email;
+  }
+  public set email(value: string) {
+    this._email = value;
+  }
+  
+  public get name(): string {
+    return this._name;
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  
+  public get lastname(): string {
+    return this._lastname;
+  }
+  public set lastname(value: string) {
+    this._lastname = value;
+  }
+  
+  public get birthdate(): Date {
+    return this._birthdate;
+  }
+  public set birthdate(value: Date) {
+    this._birthdate = value;
+  }
+  
+  public get token(): string {
+    return this._token;
+  }
+  public set token(value: string) {
+    this._token = value;
+  }
+
+  public get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+  public set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 
 }

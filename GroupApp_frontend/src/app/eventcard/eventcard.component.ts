@@ -2,17 +2,19 @@ import { Component, EventEmitter, Input, Optional, Output } from '@angular/core'
 import { Event } from '../event-container/event-container.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatIcon } from '@angular/material/icon';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-eventcard',
   standalone: true,
-  imports: [MatIcon],
+  imports: [MatIcon, NgSwitch, NgSwitchCase, NgSwitchDefault],
   templateUrl: './eventcard.component.html',
   styleUrl: './eventcard.component.css',
 })
 
 export class EventcardComponent {
   @Input() event: Event | undefined;
+  @Input() request: boolean | undefined;
 
   @Output() event_out = new EventEmitter<Event>();
   
@@ -38,6 +40,21 @@ export class EventcardComponent {
         break;
       }
     }
+  }
+
+  accept(){
+    //draft accettata
+
+  }
+
+  reject(){
+    //draft rifiutata
+
+  }
+
+  join(){
+    //partecipazione ad evento
+    
   }
 
   emit_event(){
