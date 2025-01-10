@@ -1,1 +1,66 @@
-<p>login works!</p>
+<div class = "main-container">
+    <div class="title-container">
+        <p class="title">{{purpose=='login' ? "Accedi" : "Registrati"}}</p>
+        <mat-icon class="active-icon" (click)="close()">close</mat-icon>
+    </div>
+    <div [ngSwitch]="purpose=='login'">
+        <div class="form-container" *ngSwitchCase="false">
+            <form [formGroup]="loginform" (ngSubmit)="login()" class="filter-container">
+
+                <div class="field-div">
+                    <label for="email" class="field-label">Email</label>
+                    <input type="text" id="email" formControlName="email" class="field-input"   >
+                </div>
+
+                <div class="field-div">
+                    <label for="password" class="field-label">Password</label>
+                    <input type="{{shown}}" min="0" max="1000" value="0" id="password" formControlName="password" class="field-input">
+                </div>
+                <button class="button1" (click)="change()">Mostra password</button>
+                <button type="submit" class="button2">Accedi</button>
+            </form>
+        </div>
+        <div *ngSwitchDefault>
+            <form [formGroup]="signupform" (ngSubmit)="signup()" class="filter-container">
+                <div class="field-div">
+                    <label for="email" class="field-label">Email</label>
+                    <input type="text" id="email" formControlName="email" class="field-input"   >
+                </div>
+
+                <div class="field-div">
+                    <label for="password" class="field-label">Password</label>
+                    <input type="{{shown}}" id="password" formControlName="password" class="field-input">
+                </div>
+
+                <div class="field-div">
+                    <label for="name" class="field-label">Nome</label>
+                    <input type="text" id="name" formControlName="name" class="field-input"   >
+                </div>
+
+                <div class="field-div">
+                    <label for="surname" class="field-label">Cognome</label>
+                    <input type="text" id="surname" formControlName="surname" class="field-input"   >
+                </div>
+
+                <div class="field-div">
+                    <label for="date" class="field-label">Data di nascita</label>
+                    <input type="text" id="date" formControlName="date" class="field-input"   >
+                </div>
+
+                <div class="field-div">
+                    <label for="telephone" class="field-label">Numero di telefono</label>
+                    <input type="number" id="telephone" formControlName="telephone" class="field-input"   >
+                </div>
+                <button type="submit" class="button2">Accedi</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    <div class="bottom-container">
+        <p *ngIf="err" class="red-info">Attenzione tutti i campi obbligatori</p>
+    </div>
+
+
+</div>
+

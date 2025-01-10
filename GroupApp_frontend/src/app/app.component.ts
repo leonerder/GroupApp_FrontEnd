@@ -11,12 +11,13 @@ import { PersonalAreaSidebarComponent } from './personal-area-sidebar/personal-a
 import { EventPageComponent } from './event-page/event-page.component';
 import { EventCreateComponent } from './event-create/event-create.component';
 import { exitCode } from 'node:process';
+import { LoginComponent } from './login/login.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent],
+  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent, LoginComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[
@@ -60,6 +61,7 @@ export class AppComponent {
     this.events?.updateFilter(filter);
     this.onClick();
   }
+
   @ViewChild('filters') filter: FilterSidebarComponent | undefined;
 
   @ViewChild('menu') menu: MenuComponent | undefined;
@@ -122,23 +124,40 @@ export class AppComponent {
 }
 
 export class User {
-  _email: string;
-  _name: string;
-  _lastname: string;
-  _birthdate: Date;
-  _token: string;
-  _isAdmin: boolean;
+  private _email: string;
+  private _password: string;
+  private _name: string;
+  private _lastname: string;
+  private _birthdate: Date;
+  private _token: string;
+  private _telephone: number;
+  private _isAdmin: boolean;
   
 
-  constructor(em: string, n: string, l: string, d: Date, t: string, a: boolean){
+  constructor(em: string, pw: string, n: string, l: string, d: Date, t: string, a: boolean, tel: number){
     this._email = em;
+    this._password = pw;
     this._name = n;
     this._lastname = l;
     this._birthdate = d;
     this._token = t;
     this._isAdmin = a;
+    this._telephone = tel;
   }
 
+  public get password(): string {
+    return this._password;
+  }
+  public set password(value: string) {
+    this._password = value;
+  }
+
+  public get telephone(): number {
+    return this._telephone;
+  }
+  public set telephone(value: number) {
+    this._telephone = value;
+  }
   
   public get email(): string {
     return this._email;
