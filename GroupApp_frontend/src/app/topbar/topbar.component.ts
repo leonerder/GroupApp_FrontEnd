@@ -18,7 +18,7 @@ export class TopbarComponent {
 
   @Output() filter_out = new EventEmitter<Filter>();
   @Output() switchRequest = new EventEmitter();
-  @Output() menu_out = new EventEmitter();
+  @Output() menu_out = new EventEmitter<LoginOption>();
   filter: Filter = new Filter();
   filter_name = this.filter.name;
   
@@ -30,9 +30,15 @@ export class TopbarComponent {
 
 }
 
+enum LoginOption{
+  MENU,
+  LOGIN,
+  SIGNUP
+}
 
 
 
 
-export { Filter };
+
+export { Filter, LoginOption };
 

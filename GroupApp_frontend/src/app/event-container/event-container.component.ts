@@ -200,7 +200,6 @@ export class Event{
 }
 
 export enum Type{
-  
   SPORT = "Sport",
   CULTURA = "Cultura",
   NULL = ''
@@ -208,8 +207,7 @@ export enum Type{
 
 export enum Target{
   FAMILY = "Famiglie",
-  KIDS = "Bambini",
   TEENAGERS = "Ragazzi",
   ADULTS = "Adulti",
-  NULL = ''
+  NULL = 'Tutti'
 }

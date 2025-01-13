@@ -1,3 +1,9 @@
+
+.main-container{
+    width: 30%;
+    left: 35%;
+}
+
 .active-icon{
     position: absolute;
     right: 1vh;

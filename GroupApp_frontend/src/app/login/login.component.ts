@@ -3,17 +3,32 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { User } from '../app.component';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [MatIcon, FormsModule, ReactiveFormsModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault],
+  animations: [
+    trigger('openLogin',[
+          transition(':enter',[
+            style({transform: 'translateY(100%)'}),
+            animate('0.3s ease', style({transform: 'translateY(0%)'}))
+          ]),
+          transition(':leave',[
+            style({transform: 'translateY(0%)'}),
+            animate('0.3s ease', style({transform: 'translateY(120%)'})) //not working right
+          ])
+        ]),
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 
 export class LoginComponent {
+  
+  open = false;
 
   @Input() purpose: 'login' | 'signup';
 
@@ -72,7 +87,7 @@ export class LoginComponent {
   }
 
   close(){
-
+    this.open = false;
   }
 
 }

@@ -31,6 +31,5 @@ export class EventcardReducedComponent {
 
   toggleInfo(){
     this.showInfo = !this.showInfo;
-    console.log(this.showInfo)
   }
 }

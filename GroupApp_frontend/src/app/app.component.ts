@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TopbarComponent } from './topbar/topbar.component';
+import { LoginOption, TopbarComponent } from './topbar/topbar.component';
 import { Event, EventContainerComponent } from './event-container/event-container.component';
 import { Filter } from './topbar/topbar.component';
 import { FilterSidebarComponent } from './filter-sidebar/filter-sidebar.component';
@@ -37,7 +37,12 @@ import { LoginComponent } from './login/login.component';
 
 
 export class AppComponent {
+
+
+
   title = 'GroupApp_frontend';
+
+  purp: "login" | "signup" = 'login';
 
   user: User | undefined;
 
@@ -70,6 +75,8 @@ export class AppComponent {
 
   @ViewChild('create') create: EventCreateComponent | undefined;
 
+  @ViewChild('login') login: LoginComponent | undefined;
+
 
   moreInfo(e: Event){
     this.clickOut();
@@ -87,9 +94,31 @@ export class AppComponent {
     }
   }
 
-  toggleMenu(){
-    if(this.menu?.slideToggle){
-      this.menu.slideToggle = 'open';
+  toggleMenu(log: LoginOption){
+    switch (log) {
+      case 0: {
+        if(this.menu) {
+          this.menu.slideToggle = 'open';
+        }
+        break;
+      } 
+      case 2: {
+        if(this.login) {
+          this.login.open = false;
+          this.purp = 'login';
+          this.login.open = true;
+
+        }
+        break;
+      } 
+      case 1: {
+        if(this.login) {
+          this.login.open = false;
+          this.purp = 'signup';
+          this.login.open = true;
+        }
+        break;
+      } 
     }
   }
 
@@ -118,6 +147,10 @@ export class AppComponent {
 
     if(this.eventInfo){
       this.eventInfo.isOpen = 'closed'
+    }
+
+    if(this.login){
+      this.login.open = false;
     }
   }
 

@@ -72,6 +72,7 @@ export class EventCreateComponent {
       event.maxPartecipants = this.eventForm.value.maxPartecipants ? this.eventForm.value.maxPartecipants : 0;
       event.actualPartecipants = 0;
 
+      fetch()
       console.log(event);
 
     } else {

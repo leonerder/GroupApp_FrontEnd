@@ -3,16 +3,26 @@
         <p class="title">Area Personale</p>
         <mat-icon class="active-icon" (click)="onClick()">calendar_today</mat-icon>
     </div>
-    <p class="subtitle">Partecipa</p>
-    <div class="myEventsContainer">
-        <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
-    </div>
-    <p class="subtitle">Organizza</p>
-    <div class="myEventsContainer">
-        <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
-    </div>
+    <div class="list-container">
+        <div class="list">
+            <p class="subtitle">Eventi a cui partecipi</p>
+            <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+        </div>
+        
+        <div class="list">
+            <p class="subtitle">I tuoi eventi</p>
 
-    <button *ngIf="openCreateMenu=='open'" class="create-event button2" (click)="eventCreate.emit(); openMenu()">Crea Evento</button>
+            <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+        </div>
+            
+        
+    </div>
+            
+  
+            
+     
+    
+    <button *ngIf="openCreateMenu=='open'" class="create-event button2" (click)="eventCreate.emit(); openMenu()" [@popup]="openCreateMenu">Crea Evento</button>
     
     <button class="createEventButton" (click)="openMenu()">
         <div class="cross-container">

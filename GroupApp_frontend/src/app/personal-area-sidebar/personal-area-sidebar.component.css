@@ -1,5 +1,16 @@
+
 .main-container{
+    width: 60%;
     right: 1vw;
+}
+
+.list-container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.list{
+    width: 40%;
 }
 
 .active-icon{
@@ -119,7 +130,8 @@
 
 .create-event{
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    width:15%;
+    left: 42.5%;
     bottom: 20%;
 }
+

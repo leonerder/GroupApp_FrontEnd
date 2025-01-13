@@ -1,6 +1,6 @@
-<div class = "main-container">
+<div *ngIf="open" [@openLogin] class = "main-container">
     <div class="title-container">
-        <p class="title">{{purpose=='login' ? "Accedi" : "Registrati"}}</p>
+        <p class="title">{{purpose=='login' ? "Registrati" : "Accedi"}}</p>
         <mat-icon class="active-icon" (click)="close()">close</mat-icon>
     </div>
     <div [ngSwitch]="purpose=='login'">
