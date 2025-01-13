@@ -71,8 +71,8 @@ export class EventCreateComponent {
       event.description = this.eventForm.value.description ? this.eventForm.value.description : '';
       event.maxPartecipants = this.eventForm.value.maxPartecipants ? this.eventForm.value.maxPartecipants : 0;
       event.actualPartecipants = 0;
+      
 
-      fetch()
       console.log(event);
 
     } else {

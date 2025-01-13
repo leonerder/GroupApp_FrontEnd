@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { EventcardComponent } from '../eventcard/eventcard.component';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Filter } from '../topbar/topbar.component';
+import { ApiService } from '../api.service';
+import {  HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({
   selector: 'app-event-container',
   standalone: true,
-  imports: [EventcardComponent, NgFor],
+  imports: [CommonModule, EventcardComponent],
   templateUrl: './event-container.component.html',
   styleUrl: './event-container.component.css'
 })
@@ -14,11 +16,11 @@ import { Filter } from '../topbar/topbar.component';
 export class EventContainerComponent {
 
   @Output() event_out = new EventEmitter<Event>();
-
   private filters: Filter;
   private events: Event[] | null;
   private events_shown: Event[] | null;
-  constructor(){
+
+  constructor(private apiService: ApiService){
     this.events = [];
     this.events_shown = [];
     this.filters = new Filter("",undefined,undefined,undefined,undefined);
@@ -30,36 +32,59 @@ export class EventContainerComponent {
   private populate(){    
     //da cambiare con la chiamata a backend per popolare l'array
     if(this.events){
-      fetch('http://localhost:3000/eventi?price=701&date="2026-11-19"')
-        .then( res => {
-          if(res.ok){
-            return res.json();
-          } else {
-            throw new Error('API request failed');
-          }
-        })
-        .then(data => {
-          for(const e of data){
+      this.apiService.getDrafts(0).subscribe(
+        (data: any[]) => {  // Sottoscrivi per ottenere i dati
+          // Itera sugli eventi ricevuti
+          for (const e of data) {
             let ev = new Event();
             ev.name = e.title;
             ev.date = new Date(e.date);
             ev.place = e.location;
             ev.description = e.description;
-            ev.type = e.type;
+            ev.type = e.category;
             ev.target = e.target;
             ev.price = e.price;
-            ev.maxPartecipants = 100;
-            ev.actualPartecipants = 0;
-            this.events?.push(ev);
+            ev.maxPartecipants = e.   max_subs;  // Impostiamo un numero fisso per maxPartecipants
+            ev.actualPartecipants = 0;  // Impostiamo un numero fisso per actualPartecipants
+            if(this.events) this.events.push(ev);  // Aggiungi l'evento all'array
           }
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        },
+        error => {
+          console.error('Errore durante il recupero degli eventi:', error);
+        }
+      )
+    }
+
+      // fetch('http://localhost:3000/eventi?price=701&date="2026-11-19"')
+      //   .then( res => {
+      //     if(res.ok){
+      //       return res.json();
+      //     } else {
+      //       throw new Error('API request failed');
+      //     }
+      //   })
+      //   .then(data => {
+      //     for(const e of data){
+      //       let ev = new Event();
+      //       ev.name = e.title;
+      //       ev.date = new Date(e.date);
+      //       ev.place = e.location;
+      //       ev.description = e.description;
+      //       ev.type = e.type;
+      //       ev.target = e.target;
+      //       ev.price = e.price;
+      //       ev.maxPartecipants = 100;
+      //       ev.actualPartecipants = 0;
+      //       this.events?.push(ev);
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   })
 
         console.log(this.events);
     }
-  }
+  
 
   public updateName(name: string){
     this.filters.name = name;

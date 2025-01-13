@@ -50,7 +50,25 @@ export class AppComponent {
 
   @ViewChild('events') events: EventContainerComponent | undefined;
 
+  @ViewChild('filters') filter: FilterSidebarComponent | undefined;
+
+  @ViewChild('menu') menu: MenuComponent | undefined;
+
+  @ViewChild('eventInfo') eventInfo: EventPageComponent | undefined;
+
+  @ViewChild('create') create: EventCreateComponent | undefined;
+
+  @ViewChild('login') login: LoginComponent | undefined;
+
+  @ViewChild('topbar') topbar: TopbarComponent | undefined;
+
   requests = false;
+
+  setUser(u: User){
+    this.user = u;
+    console.log(this.user);
+    if(this.topbar) this.topbar.user = this.user
+  }
 
   switchRequest(){
     this.requests = !this.requests;
@@ -67,15 +85,7 @@ export class AppComponent {
     this.onClick();
   }
 
-  @ViewChild('filters') filter: FilterSidebarComponent | undefined;
-
-  @ViewChild('menu') menu: MenuComponent | undefined;
-
-  @ViewChild('eventInfo') eventInfo: EventPageComponent | undefined;
-
-  @ViewChild('create') create: EventCreateComponent | undefined;
-
-  @ViewChild('login') login: LoginComponent | undefined;
+  
 
 
   moreInfo(e: Event){
@@ -162,7 +172,7 @@ export class User {
   private _name: string;
   private _lastname: string;
   private _birthdate: Date;
-  private _token: string;
+  private _id: string;
   private _telephone: number;
   private _isAdmin: boolean;
   
@@ -173,7 +183,7 @@ export class User {
     this._name = n;
     this._lastname = l;
     this._birthdate = d;
-    this._token = t;
+    this._id= t;
     this._isAdmin = a;
     this._telephone = tel;
   }
@@ -220,11 +230,11 @@ export class User {
     this._birthdate = value;
   }
   
-  public get token(): string {
-    return this._token;
+  public get id(): string {
+    return this._id;
   }
   public set token(value: string) {
-    this._token = value;
+    this._id = value;
   }
 
   public get isAdmin(): boolean {
