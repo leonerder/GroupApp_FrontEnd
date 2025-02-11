@@ -77,6 +77,16 @@ export class ApiService {
     return this.http.delete(this.url+`/control/draft?id=${id}`, {headers});
   }
 
+  delete_event_owner(id: string){
+    const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
+    return this.http.delete(this.url+`/event/delete_event?id=${id}`, {headers});
+  }
+
+  delete_draft_owner(id: string){
+    const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
+    return this.http.delete(this.url+`/event/delete_draft?id=${id}`, {headers});
+  }
+
   getDraftsFiltered(s: number, filter: Filter | null): Observable<any[]>{
     let searchurl = this.url+'/control/drafts?';
     if(s!=0) searchurl += 'start=' + s;
@@ -128,9 +138,10 @@ export class ApiService {
 
   }
 
+
   partecipate(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.post(this.url+`/partecipation/join?event=${id}`,{}, {headers});
+    return this.http.post(this.url+`/partecipation/join`, {event: id}, {headers});
   }
 
   unpartecipate(id: string){

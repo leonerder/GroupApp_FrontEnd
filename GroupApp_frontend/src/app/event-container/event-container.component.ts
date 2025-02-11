@@ -24,8 +24,22 @@ export class EventContainerComponent {
   purpose: 'Richieste' | 'Eventi' = 'Eventi';
   start = 0;
   justAdd = false;
+  admin = false;
+  logged = false;
 
   constructor(private apiService: ApiService, private listService: LinkingService){
+
+    apiService.getUser().subscribe({
+      next: (u) => {
+        this.logged = true;
+        this.admin = u.isAdmin;
+      },
+      error: (err) => {
+        this.logged = false;
+        this.admin = false;
+      }
+    })
+    
     listService.getList().subscribe({
       next: (p) => {
         this.purpose = p
@@ -138,10 +152,6 @@ export class EventContainerComponent {
 
   public get event_list(){
     return this.events;
-  }
-
-  emit(e: Event){
-    this.event_out.emit(e);
   }
 
 

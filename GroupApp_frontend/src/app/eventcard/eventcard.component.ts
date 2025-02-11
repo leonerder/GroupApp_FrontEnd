@@ -57,14 +57,14 @@ import { LinkingService } from '../services/linking/linking.service';
 export class EventcardComponent {
   @Input() event: Event = new Event();
   @Input() request: "Richieste" | "Eventi" = "Eventi";
-  
+  @Input() logged: boolean = false;
+  @Input() admin: boolean = false;
   hovering : 'hovering' | 'out' = 'out'
   shown_icon: string = "question_mark";
   date: string = "";
   remaining_places = 0;
 
-  logged: boolean = false;
-  admin: boolean = false;
+  
 
   constructor(private apiService: ApiService, private linkService: LinkingService){
     
@@ -82,7 +82,6 @@ export class EventcardComponent {
       this.linkService.getList().subscribe({
         next: (req) => {
           this.request = req;
-          console.error(this.request);
         },
         error: (err) => console.log(err)
       });
@@ -92,16 +91,7 @@ export class EventcardComponent {
         },
         error: (err: any) => console.log(err)
       });
-      this.apiService.getUser().subscribe({
-        next: (u) => {
-          this.logged = true;
-          this.admin = u.isAdmin;
-        },
-        error: () => {
-          this.logged = false;
-          this.admin = false;
-        }
-      })
+      
     }
     
     switch(this.event?.type){

@@ -1,7 +1,7 @@
 
 <div class="main">
     <div class="eventback">
-    <app-eventcard *ngFor="let e of event_list" [event]="e" [request]="this.purpose"></app-eventcard>
+    <app-eventcard *ngFor="let e of event_list" [event]="e" [request]="this.purpose" [admin]="admin" [logged]="logged"></app-eventcard>
     <div class="bottom-div">
         <button class="button2" (click)="seeMore()">Carica Altro</button>
     </div>

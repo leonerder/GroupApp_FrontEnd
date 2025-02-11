@@ -82,6 +82,7 @@ import { link } from 'fs';
 })
 export class EventcardReducedComponent {
   @Input() event: Event = new Event();
+  @Input() type: 'draft' | 'event' = 'event'
   @Input() purpose: 'own' | 'partecipation' = 'own'
 
   hovering: 'hovering' | 'out' = 'out';
@@ -97,12 +98,23 @@ export class EventcardReducedComponent {
   }
 
   remove(){
-    this.apiService.delete_draft(this.event.id).subscribe({
-      next: (data) => {
-        this.linkService.updateReload(true);
-      },
-      error: (err) => console.log(err)
-    })
+    if(this.type == 'draft'){
+      this.apiService.delete_draft_owner(this.event.id).subscribe({
+        next: (data) => {
+          this.linkService.updateReload(true);
+        },
+        error: (err) => console.log(err)
+      })
+    } else {
+      this.apiService.delete_event_owner(this.event.id).subscribe({
+        next: (data) => {
+          this.linkService.updateReload(true);
+        },
+        error: (err) => console.log(err)
+      })
+    }
+
+    
     
   }
 
@@ -114,8 +126,13 @@ export class EventcardReducedComponent {
     this.apiService.unpartecipate(this.event.id).subscribe({
       next: (data) => {
         this.linkService.updateReload(true);
+        console.log(data);
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        console.error("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        this.linkService.updateReload(true);
+        console.log(err)
+      }
     })
   }
 }

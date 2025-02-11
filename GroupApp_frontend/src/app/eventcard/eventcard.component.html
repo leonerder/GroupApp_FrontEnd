@@ -46,7 +46,7 @@
             </div>
             <div *ngSwitchDefault>evento undefined</div>
             <mat-icon class="active-icon" (click)="emit_event()">info</mat-icon>
-            <mat-icon *ngif="admin" class="active-icon" (click)="this.delete()">delete</mat-icon>
+            <mat-icon *ngIf="admin" class="active-icon" (click)="this.delete()">delete</mat-icon>
         </div>
         
         <div class="gradient"  alt="poster" [@slide]="hovering"></div>

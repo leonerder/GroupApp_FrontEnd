@@ -87,7 +87,11 @@ export class EventCreateComponent {
           console.log(d);
           this.linkService.updateReload(true);
         },
-        error: (err) => console.log(err)
+        error: (err) => {
+          this.linkService.updateReload(true);
+          console.log(err);
+          
+        }
       });
       this.isOpen = false;
       this.linkService.updateDraft();

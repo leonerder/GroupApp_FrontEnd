@@ -128,7 +128,7 @@ export class PersonalAreaSidebarComponent {
     this.apiService.getOrganizedDraft().subscribe({
       next: (data: any) => {
         this.myDrafts = [];
-        //console.log(data)
+        console.log(data)
           
         for(let e = 0; e<data.length; e++){
           let ev = new Event();
