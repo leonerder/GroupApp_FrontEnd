@@ -1,7 +1,7 @@
 <div class="container" (mouseenter)="toggleInfo()" (mouseleave)="toggleInfo()">
     <div class="interaction-container">
         <p class="title" *ngIf="hovering=='out'" @hovering-title>
-            {{event?.name}}
+            {{event.name}}
         </p>
         <mat-icon *ngIf="hovering=='hovering' " class="active-icon info-icon" @hovering-info (click)="event_out()">info</mat-icon>
         <mat-icon *ngIf="hovering=='hovering' && purpose=='own'"  class="active-icon action-icon" @hovering-action (click)="remove()">delete</mat-icon>

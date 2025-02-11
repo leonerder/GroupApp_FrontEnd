@@ -18,7 +18,7 @@ import { ApiService } from './services/api/api.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent, LoginComponent],
+  imports: [TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent, LoginComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[

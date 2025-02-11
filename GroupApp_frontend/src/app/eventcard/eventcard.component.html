@@ -7,7 +7,7 @@
         <div class="interaction-container">
             <div [@slide-text]="hovering" class="whole-container">
                 <div  class="title-container">
-                    <p class="title">{{event?.name}}</p> 
+                    <p class="title">{{event.name}}</p> 
                 </div>
                 <div class="fields-container">
                     <div class="info-container">
@@ -16,11 +16,11 @@
                     </div>
                     <div class="info-container">
                         <p class="subtitle">Dove:</p>
-                        <p>{{event?.place}}</p>
+                        <p>{{event.place}}</p>
                     </div>
                     <div *ngIf="hovering == 'hovering'" class="info-container">
                         <p class="subtitle">Categoria:</p>
-                        <p>{{event?.target}}</p>
+                        <p>{{event.target}}</p>
                     </div>
                     <div *ngIf="hovering == 'hovering'" class="info-container">
                         <p class="subtitle">Posti Rimasti:</p>
