@@ -38,7 +38,7 @@
         </div>
         <div [ngSwitch]="request" class="button-container">
             <div *ngSwitchCase='"Eventi"'>
-                <button class="button2" (click)="join()">Partecipa</button>
+                <button *ngIf="logged" class="button2" (click)="join()">Partecipa</button>
             </div>
             <div *ngSwitchCase='"Richieste"'>
                 <button class="button2 req-button" (click)="accept()">Accetta</button>
@@ -46,7 +46,7 @@
             </div>
             <div *ngSwitchDefault>evento undefined</div>
             <mat-icon class="active-icon" (click)="emit_event()">info</mat-icon>
-            <mat-icon class="active-icon" (click)="this.delete()">delete</mat-icon>
+            <mat-icon *ngif="admin" class="active-icon" (click)="this.delete()">delete</mat-icon>
         </div>
         
         <div class="gradient"  alt="poster" [@slide]="hovering"></div>

@@ -43,11 +43,9 @@ export class AppComponent {
   constructor(private apiService: ApiService){}
 
   ngOnInit(){
-    console.log("entro");
     const token = localStorage.getItem("token");
     
     if(token) {
-      console.log(token);
       this.apiService.token_access().subscribe({
         next: (val: any) => {
           var user = new User(
@@ -101,13 +99,6 @@ export class AppComponent {
   switchRequest(){
     this.requests = !this.requests;
   }
-  
-  // onFilter(filter: Filter){
-  //   console.log(filter);
-  //   console.log(filter.date);
-  //   this.events?.updateFilter(filter);
-  //   this.onClick();
-  // }
 
   
 

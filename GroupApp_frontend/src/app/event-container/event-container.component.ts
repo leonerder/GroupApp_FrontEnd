@@ -78,8 +78,6 @@ export class EventContainerComponent {
   private populate(){
       this.apiService.getEventsFiltered(this.start, this.filters).subscribe({
         next: (data: string | any[]) => {
-              //console.log(data)
-              console.log(this.justAdd);
               if(!this.justAdd) this.events = [];
               this.start = 0;
               this.justAdd = false;
@@ -107,7 +105,7 @@ export class EventContainerComponent {
     private populateDrafts(){
       this.apiService.getDraftsFiltered(this.start, this.filters).subscribe({
         next: (data: string | any[]) => {
-          //console.log(data)
+
           if(!this.justAdd) this.events = [];
           this.start = 0;
           this.justAdd = false;

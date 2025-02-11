@@ -64,6 +64,7 @@ export class EventcardComponent {
   remaining_places = 0;
 
   logged: boolean = false;
+  admin: boolean = false;
 
   constructor(private apiService: ApiService, private linkService: LinkingService){
     
@@ -92,11 +93,13 @@ export class EventcardComponent {
         error: (err: any) => console.log(err)
       });
       this.apiService.getUser().subscribe({
-        next: () => {
+        next: (u) => {
           this.logged = true;
+          this.admin = u.isAdmin;
         },
         error: () => {
           this.logged = false;
+          this.admin = false;
         }
       })
     }
