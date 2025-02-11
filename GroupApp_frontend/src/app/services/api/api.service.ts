@@ -64,8 +64,6 @@ export class ApiService {
     if(filter?.target ) searchurl += '&target='+ filter.target;
     if(filter?.type) searchurl += '&category='+ filter.type;
 
-
-    console.log(searchurl);
     return this.http.get<any[]>(searchurl); 
   }
 

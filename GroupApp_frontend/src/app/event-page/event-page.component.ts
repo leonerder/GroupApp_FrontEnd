@@ -38,7 +38,6 @@ export class EventPageComponent {
     this.linkService.getEvent().subscribe({
       next: (ev) => {
         this.event = ev;
-        console.log(this.event);
         this.ngOnInit();
         this.isOpen = 'open';
       },
@@ -54,7 +53,6 @@ export class EventPageComponent {
   }
 
   ngOnInit(){
-    console.log(this.event);
     const eventDate = new Date(this.event.date);
     const year = eventDate.getFullYear();
     const month = ('0' + (eventDate.getMonth() + 1)).slice(-2);
