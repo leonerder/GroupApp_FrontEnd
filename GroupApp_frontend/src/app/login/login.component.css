@@ -1,0 +1,39 @@
+
+.main-container{
+    width: 30%;
+    height: fit-content;
+    left: 35%;
+    padding-bottom: 3%;
+}
+
+.title-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3vh;
+}
+
+.password{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.password-icon{
+    position: absolute;
+    right: 15%;
+    top: 50%;
+}
+
+.button-container{
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+
+}
+
+

@@ -1,0 +1,97 @@
+.main-container{
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    left: 30%;
+    
+}
+
+.top-space{
+    height:60%;
+}
+
+.filter-space{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
+
+.left-form{
+    display: flex;
+    justify-content: left;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    height: fit-content;
+    overflow: visible;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+    padding: 2vh;
+}
+
+.active-icon{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+
+.filter-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+.field-div{
+    display: flex;
+    margin: 5%;           
+    
+    
+    height: 50px;
+    width: 100%; 
+    position: relative;
+    overflow: visible;
+}
+
+.description-div{
+    height: 60%;
+}
+
+.button-container{
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.description{
+    padding-top: 10px;
+    resize: none;
+    scrollbar-width: none;
+}
+
+.validator-container{
+    margin: 10px;
+}
+
+.text-container{
+    width: 80%;
+    height: fit-content;
+    overflow: visible;
+}
+
+
+
+
+

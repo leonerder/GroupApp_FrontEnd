@@ -1,12 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { EventcardComponent } from '../eventcard/eventcard.component';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Filter } from '../topbar/topbar.component';
+import { ApiService } from '../services/api/api.service';
+import {  HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { LinkingService } from '../services/linking/linking.service';
+import { User } from '../app.component';
+import { link } from 'fs';
 
 @Component({
   selector: 'app-event-container',
   standalone: true,
-  imports: [EventcardComponent, NgFor],
+  imports: [CommonModule, EventcardComponent],
   templateUrl: './event-container.component.html',
   styleUrl: './event-container.component.css'
 })
@@ -14,69 +19,127 @@ import { Filter } from '../topbar/topbar.component';
 export class EventContainerComponent {
 
   @Output() event_out = new EventEmitter<Event>();
-
   private filters: Filter;
-  private events: Event[] | null;
-  private events_shown: Event[] | null;
-  constructor(){
+  private events: Event[];
+  purpose: 'Richieste' | 'Eventi' = 'Eventi';
+  start = 0;
+  justAdd = false;
+
+  constructor(private apiService: ApiService, private listService: LinkingService){
+    listService.getList().subscribe({
+      next: (p) => {
+        this.purpose = p
+        
+        if(p == 'Eventi'){
+          this.populate();
+        }else{
+          this.populateDrafts();
+        }
+      },
+      error: (err) => console.log(err)
+    })
+
+    listService.getFilters().subscribe({
+      next: (f) => {
+        console.log(f)
+        this.filters = f;
+        if(this.purpose == 'Eventi'){
+          this.populate();
+        }else{
+          this.populateDrafts();
+        }
+      },
+      error: (err) => console.log(err)
+    })
+
+    listService.getReload().subscribe({
+      next: (b) => {
+        if(b){
+          this.ngOnInit();
+        }
+      },
+      error: (err) => console.log(err)
+    })
+    
     this.events = [];
-    this.events_shown = [];
-    this.filters = new Filter("",undefined,undefined,undefined,undefined);
-    this.populate(); 
-    this.updateName('');
-    this.applyFilters();
+    this.filters = new Filter(undefined,undefined,undefined,undefined,undefined);
+    
   }
 
-  private populate(){    
-    //da cambiare con la chiamata a backend per popolare l'array
-    if(this.events){
-      let tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      this.events[0] = new Event("partitozza", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.FAMILY, 0, 10);
-      this.events[1] = new Event("partitina", new Date(), tomorrow, "campetto", "venite solo se siete scarsi e non avete nulla da fare effettivamente, perche qui non siamo molto forti", Type.SPORT, Target.ADULTS, 10, 12);
-      this.events[2] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[3] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[4] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[5] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[6] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[7] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
-      this.events[8] = new Event("Gruppo Lettura", new Date(), tomorrow,"Biblioteca Comunale", "Consueta lettura in compagnia per grandi e piccini", Type.CULTURA, Target.FAMILY, 0, 100);
+  ngOnInit(){
+    if(this.purpose == 'Eventi'){
+      this.populate();
+    }else{
+      this.populateDrafts();
+    }
+    
+  }
+
+  private populate(){
+      this.apiService.getEventsFiltered(this.start, this.filters).subscribe({
+        next: (data: string | any[]) => {
+              //console.log(data)
+              console.log(this.justAdd);
+              if(!this.justAdd) this.events = [];
+              this.start = 0;
+              this.justAdd = false;
+              for(let e = 0; e<data.length; e++){
+                let ev = new Event();
+                ev.id = data[e]._id,
+                ev.date = new Date(data[e].date);
+                ev.name = data[e].title;
+                ev.description = data[e].description;
+                ev.maxPartecipants = data[e].max_subs;
+                ev.target = data[e].target;
+                ev.type = data[e].category;
+                ev.price = data[e].price;
+                ev.place = data[e].location;
+
+                this.events.push(ev);
+                //console.log(ev)
+              }
+            },
+            error: (err: any) => console.log(err)
+      })
       
     }
-  }
 
-  public updateName(name: string){
-    this.filters.name = name;
-    this.applyFilters();
-  }
+    private populateDrafts(){
+      this.apiService.getDraftsFiltered(this.start, this.filters).subscribe({
+        next: (data: string | any[]) => {
+          //console.log(data)
+          if(!this.justAdd) this.events = [];
+          this.start = 0;
+          this.justAdd = false;
+          for(let e = 0; e<data.length; e++){
+            let ev = new Event();
+            ev.id = data[e]._id,
+            ev.date = new Date(data[e].date);
+            ev.name = data[e].title;
+            ev.description = data[e].description;
+            ev.maxPartecipants = data[e].max_subs;
+            ev.target = data[e].target;
+            ev.type = data[e].category;
+            ev.price = data[e].price;
+            ev.place = data[e].location;
 
-  public updateFilter(filter: Filter){
-    this.filters.startdate = filter.startdate;
-    this.filters.endDate = filter.endDate;
-    this.filters.type = filter.type;
-    this.filters.target = filter.target;
-    this.applyFilters();
-  }
-
-  public applyFilters(){
-    
-    if(this.events){
-      this.events_shown = this.events
-      this.events_shown = this.events.filter((ev) => {
-        console.log(this.filters.startdate);
-        console.log(ev.date)
-        return ev.name.includes(this.filters.name) && 
-              (!isNaN(Date.parse(this.filters.endDate.toDateString())) ? ev.date <= this.filters.endDate : true) &&
-              (!isNaN(Date.parse(this.filters.startdate.toDateString())) ? ev.date >= this.filters.startdate : true) && 
-              (this.filters.target ? ev.target == this.filters.target : true) && 
-              (this.filters.type ? ev.type == this.filters.type : true);
+            this.events.push(ev);
+            //console.log(ev)
+          }
+        },
+            error: (err) => console.log(err)
       })
+      
     }
-    console.log(this.events_shown);
+    
+  seeMore(){
+    this.justAdd = true;
+    this.start += 100;
+    this.ngOnInit()
   }
 
   public get event_list(){
-    return this.events_shown;
+    return this.events;
   }
 
   emit(e: Event){
@@ -89,39 +152,63 @@ export class EventContainerComponent {
 
 export class Event{
 
+  private _id: string;
   private _name: string;
   private _startDate;
-  private _endDate;
   private _place;
   private _description;
   private _type;
   private _target;
   private _price;
   private _maxPartecipants;
-  private _actualPartecipants;
+
+  
   
   
 
-  constructor(name: string, start_date: Date, end_date: Date, place: String, description: String, type: Type, target: Target, price: number, maxP: number){
+  constructor(){
     
-    this._name = name;
-    this._startDate = start_date;
-    this._endDate = end_date;
-    this._place = place;
-    this._description = description;
-    this._type = type;
-    this._target = target;
-    this._price = price;
-    this._maxPartecipants = maxP;
-    this._actualPartecipants = 0;
+    this._id = '';
+    this._name = '' ;
+    this._startDate = new Date();
+    this._place = '';
+    this._description = '';
+    this._type = Type.NULL;
+    this._target =Target.NULL;
+    this._price = 0;
+    this._maxPartecipants = 0;
+  }
+
+
+  public get id(): string {
+    return this._id;
+  }
+  public set id(value: string) {
+    this._id = value;
   }
 
   public get price() {
     return this._price;
   }
 
-  public remaining_places(){
-    return this._maxPartecipants - this._actualPartecipants;
+  public set type(value) {
+    this._type = value;
+  }
+  public set description(value) {
+    this._description = value;
+  }
+  public set place(value) {
+    this._place = value;
+  }
+  public set price(value) {
+    this._price = value;
+  }
+  
+  public get maxPartecipants() {
+    return this._maxPartecipants;
+  }
+  public set maxPartecipants(value) {
+    this._maxPartecipants = value;
   }
 
   public get target() {
@@ -133,12 +220,18 @@ export class Event{
   public get name() {
     return this._name;
   }
-  public get date(){
+
+  public set name(value: string) {
+    this._name = value;
+  }
+  
+  public get date() {
     return this._startDate;
   }
-  public get end_date(){
-    return this._endDate;
+  public set date(value) {
+    this._startDate = value;
   }
+  
   public get place(){
     return this._place;
   }
@@ -152,7 +245,6 @@ export class Event{
 }
 
 export enum Type{
-  
   SPORT = "Sport",
   CULTURA = "Cultura",
   NULL = ''
@@ -160,7 +252,6 @@ export enum Type{
 
 export enum Target{
   FAMILY = "Famiglie",
-  KIDS = "Bambini",
   TEENAGERS = "Ragazzi",
   ADULTS = "Adulti",
   NULL = ''

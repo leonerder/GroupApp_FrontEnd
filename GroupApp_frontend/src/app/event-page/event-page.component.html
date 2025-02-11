@@ -1,52 +1,49 @@
 <div class="main-container" *ngIf="isOpen == 'open'" @openEvent>
     <div>
-        <p class="title">{{event?.name}}</p>
+        <p class="title">{{this.event.name}}</p>
+        <mat-icon class="active-icon close-icon" (click)="toggle()">close</mat-icon>
     </div>
-    <div class="horizontal">
-        <div class="left">
-            <div class="horizontal" style="height: 30%;">
-                <span class="text-box">
-                   <p class="subtitle">luogo:</p> 
-                   <p>{{event?.place}}</p>
-                </span>
-                
-                <span class="text-box">
-                   <p class="subtitle">data:</p> 
-                   <p>{{event?.date?.getDay()}}/{{event?.date?.getMonth()}}/{{event?.date?.getFullYear()}} - {{event?.end_date?.getDay()}}/{{event?.end_date?.getMonth()}}/{{event?.end_date?.getFullYear()}}</p>
-                </span>
-                
-                <span class="text-box">
-                    <p class="subtitle">target:</p>
-                    <p>{{event?.target}}</p>
-                </span>
-                
-                <span class="text-box">
-                    <p class="subtitle">posti rimanenti:</p>
-                    <p>{{event?.remaining_places()}}</p>
-                </span>
-                
-                <span class="text-box">
-                    <p class="subtitle">prezzo:</p>
-                    <p>{{event?.price == 0 ? 'Gratis' : event?.price + "€"}}</p>
-                </span>
-            </div>
     
-            <div >
-                <p class="subtitle">descrizione</p>
-                <p>{{event?.description}}</p>
+    <div class="parallel">
+        <div class="horizontal">
+            <div class="text-box">
+               <p class="subtitle">luogo:</p> 
+               <p class="red-info">{{this.event.place}}</p>
             </div>
-    
-            <div>
-                <p class="subtitle">più infomrazioni</p>
+
+            <div class="text-box">
+               <p class="subtitle">data:</p> 
+               <p>{{this.date}}</p>
             </div>
-    
+            <div class="text-box">
+                <p class="subtitle">target:</p>
+                <p>{{this.event.target}}</p>
+            </div>
+
+            <div class="text-box">
+                <p class="subtitle">posti rimanenti:</p>
+                <p>{{this.event.maxPartecipants - this.partecipants}}</p>
+            </div>
+
+            <div class="text-box">
+                <p class="subtitle">prezzo:</p>
+                <p>{{this.event.price == 0 ? 'Gratis' : this.event.price + "€"}}</p>
+            </div>
+            <div class="desc-box">
+                <p class="subtitle">descrizione:</p>
+                <p>{{this.event.description}}</p>
+            </div>
+            
         </div>
-        
-        <div>
+        <div class="poster-container">
             <img src="../\public\assets\posters\example-poster.jpg" alt="locandina" class="poster">
         </div>
-
-
     </div>
+    
+    
+    
+
+
+    
     
 </div>

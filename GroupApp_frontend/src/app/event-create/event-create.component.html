@@ -1,0 +1,85 @@
+<div *ngIf="isOpen==true" class="main-container" [@slide]>
+    <div class="title-container">
+        <p class="title">Crea Evento</p>
+        <mat-icon class="active-icon" (click)="close()">close</mat-icon>
+    </div>
+
+    <div class="top-space">
+        <form   [formGroup]="eventForm" (ngSubmit)="submitDraft()" class="filter-container" class="left-form">
+            <div class="filter-space">
+                <div class="field-div">
+                
+                    <label for="title" class="field-label"> Nome </label>
+                    <input type="text" id="title" formControlName="title" class="field-input">
+                </div>
+                
+                
+                
+                <div class="field-div">
+                    
+                    <label for="category" class="field-label"> Tipo </label>
+                    <select name="selection" id="category" formControlName="category" class="field-input" placeholder="">
+                        <option *ngFor="let t of types">{{t}}</option>
+                    </select>
+                </div>
+                
+                <div class="field-div">
+                   
+                    <label for="target" class="field-label">Età Consigliata</label>
+                    <select name="selection" id="target" formControlName="target" class="field-input">
+                        <option *ngFor="let t of targets" [value]="t">{{t}}</option>
+                    </select>
+                </div>
+    
+                <div class="field-div" >
+                    
+                    <label for="date" class="field-label"> Data di inizio </label>
+                    <input type="date" id="date" formControlName="date" class="field-input">
+                </div>
+                
+                <div class="field-div">
+                    
+                    <label for="place" class="field-label"> Luogo </label>
+                    <input type="text" name="place" id="place" formControlName="place" class="field-input" placeholder="">
+                </div>
+            </div>
+            
+            <div class="filter-space">
+                <div class="field-div">
+                    <label for="price" class="field-label">Prezzo</label>
+                    <input type="number" value="0" id="price" formControlName="price" class="field-input"   >
+                </div>
+    
+                <div class="field-div">
+                    <label for="max_subs" class="field-label">Partecipanti Massimi</label>
+                    <input type="number" value="1" id="max_subs" formControlName="max_subs" class="field-input"   >
+                </div>
+    
+                <div class="field-div description-div">
+                    
+                    <label for="description" class="field-label"> Descrizione </label>
+                    <textarea name="description" id="description" formControlName="description" class="field-input description" placeholder=""></textarea>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+
+    <div class="validator-container">
+        <p *ngIf="valErr" class="red-info">{{err}}</p>
+    </div>
+
+    <div class="text-container">
+        <p class="simpletext"> se l'evento ha luogo in un luogo pubblico è necessario scaricare il file sottostante, compilare i file necessari e presentarlo agli addetti competenti</p>
+        <button class="button1" (click) = 'savePdf()'>scarica modulo</button>
+    
+    </div>
+
+    
+
+    <div class="button-container">
+        <button type="submit" class="button2" (click)="submitDraft()">Conferma</button>
+    </div>
+    
+</div>

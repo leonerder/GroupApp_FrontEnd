@@ -1,5 +1,17 @@
+
 .main-container{
-    right: 5px;
+    width: 50%;
+    right: -1.5vw;
+}
+
+.list-container{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.list{
+    width: 40%;
 }
 
 .active-icon{
@@ -10,21 +22,31 @@
 
 .card{
     width: 98%;
+    scroll-snap-align: start none;
 }
 
 .myEventsContainer{
     width: 100%;
-    
+    margin: 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: scroll;
     scrollbar-width: none;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    height: 100%;
+    
+}
+
+.myEventsContainer > *:last-child{
+    padding-bottom: 20%;
+    
 }
 
 .title-container{
-    height: 100px;
-    
+    height: 13vh;
+    padding-bottom: 3vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -44,6 +66,10 @@
     margin: 12px;
 }
 
+.white-space{
+    height: 30%;
+}
+
 .icon{
     color: var(--tertiary-color);
     margin: 0;
@@ -53,10 +79,66 @@
     font-weight: bold;
 }
 
+.createEventButton{
+    cursor: pointer;
+    position: absolute;
+    background-color: var(--accent-color);
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50px;
+
+    border: 3px solid var(--tertiary-color);
+    z-index: 10;
+
+    color: var(--primary-color);
+    font-weight: bold;
+    
+    
+}
+
+.cross-vertical{
+    position: absolute;
+    z-index: 11;
+    height: 4vh;
+    width: 0.7vh;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+.cross-horizontal{
+    position: absolute;
+    z-index: 11;
+    height: 0.7vh;
+    width: 4vh;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+
+.cross-container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
 .title{
     margin: 1vw;
 }
 
 .subtitle{
     margin: 1vw;
+    font-weight: bold;
 }
+
+.create-event{
+    position: absolute;
+    width:15%;
+    left: 42.5%;
+    bottom: 20%;
+}
+

@@ -1,7 +1,7 @@
 <div class="main-container" [@slide]="filterClicked" class="main-container" id="container">
     <div class="title-container">
         <p class="title">Filtri</p>
-        <mat-icon class="active-icon" (click)="onClick()" >filter_list</mat-icon>
+        <mat-icon class=" active-icon close-icon" (click)="onClick()" >filter_list</mat-icon>
         
         
     </div>
@@ -17,22 +17,28 @@
             
             <div class="field-div">
                
-                <label for="target" class="field-label"> Categoria </label>
+            <label for="target" class="field-label">fascia d'età</label>
                 <select name="selection" id="target" formControlName="target" class="field-input">
                     <option *ngFor="let t of targets" [value]="t">{{t}}</option>
                 </select>
             </div>
+
             <div class="field-div" >
-                
                 <label for="startDate" class="field-label"> Data di inizio </label>
                 <input type="date" id="startDate" formControlName="startDate" class="field-input">
             </div>
+            
             <div class="field-div">
-                <label for="endDate" class="field-label">Data di fine</label>
-                <input type="date" id="endDate" formControlName="endDate" class="field-input"   >
+                <label for="price" class="field-label">budget</label>
+                <input type="number" min="0" max="1000" value="0" id="price" formControlName="price" class="field-input"   >
             </div>
             
-            <button type="submit" class="button2">Conferma</button>
+
+            <div class="button-container">
+                <button type="submit" class="button2">Conferma</button>
+                <mat-icon class="active-icon" (click)="resetFilter(); submitFilters()">filter_list_off</mat-icon>
+            </div>
+            
         </form>
         
         

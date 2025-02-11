@@ -22,7 +22,7 @@
     position: absolute;
     right: 8px;
     top: 8px;
-    z-index: 2;
+    z-index: 5;
 }
 
 .active-icon{
@@ -34,28 +34,60 @@
     z-index: 2;
     height: 100%;
     width: 100%;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 0%,var(--secondary-color) 40%, var(--secondary-color) 100%);
+
+    background-image: url('/assets/posters/example-poster.jpg');
+    background-position:top;
+    background-size:contain;
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%);
+    /* background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, var(--secondary-color) 70%, var(--secondary-color) 10%); */
 }
 
 .interaction-container{
-    position: absolute;
-    top: 40%;
+    position:absolute;
     z-index: 3;
-    height: 60%;
+    height: 100%;
     width: 100%;
-
+    top: 0%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: top;
 }
 
+.whole-container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.info-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+.fields-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: top;
+}
 .button-container{
+    position: absolute;
+    z-index: 6;
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
     padding: 5px;
     display: flex;
     align-items: center;
+    bottom: 2%;
 }
 
 .title-container{

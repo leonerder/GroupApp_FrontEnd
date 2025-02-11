@@ -1,8 +1,4 @@
-.active-icon{
-    position: absolute;
-    right: 12px;
-    top: 12px;
-}
+
 
 .main-container{
     left:35%;
@@ -22,4 +18,24 @@
     color: var(--tertiary-color);
     font-weight: bold;
     margin: 0;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container{
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+
+}
+
+.simpletext{
+    margin: 5%;
 }

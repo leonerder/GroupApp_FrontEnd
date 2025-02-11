@@ -1,12 +1,16 @@
 .container{
     position: relative;
-    height: 100px;
+    height: 10vh;
     width: 90%;
     margin: 1vh 1vw 1vh 1vw;
     border-radius: 12px;
     background-color: var(--secondary-color);
     border: 2px solid var(--tertiary-color);
     align-items:center;
+}
+
+.container:hover{
+    cursor:pointer;
 }
 
 .back-poster{
@@ -27,14 +31,27 @@
     z-index: 2;
     height: 100%;
     width: 100%;
-    background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, var(--secondary-color) 70%, var(--secondary-color) 10%);
+
+    background-image: url('/assets/posters/example-poster.jpg');
+    background-position: center;
+    background-size:cover;
+    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 30%, black 80%, black 100%);
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 30%, black 80%, black 100%);
+    /* background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, var(--secondary-color) 70%, var(--secondary-color) 10%); */
 }
 
 .active-icon{
     position: absolute;
     top: 38%;
-    right: 1vw;
     z-index: 4;
+}
+
+.info-icon{
+    left: 5%;
+}
+
+.action-icon{
+    left: 22%;
 }
 
 .interaction-container{

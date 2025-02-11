@@ -45,14 +45,17 @@ div{
 }
 
 .button1{
+    margin: 0;
     height: 50%;
     width: 30%;
     max-width: 180px;
-    background-color: transparent;  
-    border: none;
+    background-color: var(--tertiary-color);
     color: var(--primary-color);
     font-size: 100%;
     cursor: pointer;
+    border-radius: 6px;
+    margin: 2px;
+    border: 2px solid var(--tertiary-color);
 } 
 
 .button1:hover{
@@ -98,6 +101,62 @@ div{
     cursor: pointer;
 }
 
+.close-icon{
+    position: absolute;
+    right: 12px;
+    top: 12px;
+}
+
+.filter-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.field-div{
+    display: flex;
+    margin: 10px;
+    
+    
+    height: 50px;
+    width: 300px; 
+    position: relative;
+    overflow: visible;
+}
+
+.field-div-selected{
+    border: 3px solid var(--accent-color);
+}
+
+.field-label{
+    color: var(--tertiary-color);
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: var(--primary-color);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.field-input{
+    border-radius: 5px;
+    border: 3px solid var(--secondary-color);
+    background-color: transparent;
+    width: 100%;
+    color: var(--tertiary-color);
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    outline:none;
+}
+
+.field-input:focus, .field-input:active{
+    border: 3px solid var(--accent-color);
+}
+
 p{
     color: var(--primary-color);
     margin: 0px;
@@ -116,5 +175,19 @@ p{
     
 }
 
+.red-info{
+    color: red;
+    font-size: 16px;
+}
+
+.simpletext{
+    color: var(--tertiary-color);
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
 html, body { height: 100%; }
 body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
