@@ -103,14 +103,20 @@ export class EventcardReducedComponent {
         next: (data) => {
           this.linkService.updateReload(true);
         },
-        error: (err) => console.log(err)
+        error: (err) => {
+          this.linkService.updateReload(true);
+          console.log(err)
+        }
       })
     } else {
       this.apiService.delete_event_owner(this.event.id).subscribe({
         next: (data) => {
           this.linkService.updateReload(true);
         },
-        error: (err) => console.log(err)
+        error: (err) => {
+          this.linkService.updateReload(true);
+          console.log(err)
+        }
       })
     }
 
@@ -129,7 +135,6 @@ export class EventcardReducedComponent {
         console.log(data);
       },
       error: (err) => {
-        console.error("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         this.linkService.updateReload(true);
         console.log(err)
       }

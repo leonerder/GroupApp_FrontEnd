@@ -80,7 +80,7 @@ export class PersonalAreaSidebarComponent {
 
   constructor(private apiService: ApiService, private linkService: LinkingService){
     linkService.getReload().subscribe({
-      next: (data) => this.ngOnInit(),
+      next: (data) => this.populate(),
       error: (err) => console.log(err)
     })
 
@@ -97,14 +97,17 @@ export class PersonalAreaSidebarComponent {
   }
 
   ngOnInit(){
-    this.populate()
+    this.populate();
   }
 
   populate(){
+    this.mySubs = [];
+    this.myDrafts = [];
+    this.myEvents = [];
+
     this.apiService.getSubscribedEvents().subscribe({
+      
       next: (data: any) => {
-        this.mySubs = [];
-        console.log(data)
           
         for(let e = 0; e<data.length; e++){
           let ev = new Event();
@@ -118,7 +121,7 @@ export class PersonalAreaSidebarComponent {
           ev.price = data[e].price;
           ev.place = data[e].location;
           this.mySubs.push(ev);
-          console.warn(ev)
+          // console.warn(ev)
           
         }
       },
@@ -128,7 +131,7 @@ export class PersonalAreaSidebarComponent {
     this.apiService.getOrganizedDraft().subscribe({
       next: (data: any) => {
         this.myDrafts = [];
-        console.log(data)
+        //console.log(data)
           
         for(let e = 0; e<data.length; e++){
           let ev = new Event();
@@ -146,7 +149,10 @@ export class PersonalAreaSidebarComponent {
           
         }
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        this.myDrafts = [];
+        console.log(err)
+      }
     });
 
     this.apiService.getOrganizedEvents().subscribe({
