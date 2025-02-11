@@ -12,6 +12,7 @@ import { EventPageComponent } from './event-page/event-page.component';
 import { EventCreateComponent } from './event-create/event-create.component';
 import { exitCode } from 'node:process';
 import { LoginComponent } from './login/login.component';
+import { ApiService } from './services/api/api.service';
 
 
 @Component({
@@ -37,8 +38,41 @@ import { LoginComponent } from './login/login.component';
 
 
 export class AppComponent {
+  logged = false;
 
+  constructor(private apiService: ApiService){}
 
+  ngOnInit(){
+    console.log("entro");
+    const token = localStorage.getItem("token");
+    
+    if(token) {
+      console.log(token);
+      this.apiService.token_access().subscribe({
+        next: (val: any) => {
+          var user = new User(
+            val.user.mail,
+            val.user.password,
+            val.user.name,
+            val.user.surname,
+            val.user.dateOfBirth,
+            val.user._id,
+            val.user.isAdmin,
+            val.user.telephone
+          )
+          user.token = token;
+          this.apiService.updateUser(user);
+          this.logged = true;
+        },
+        
+        error: (err) => {
+          console.error('Errore:', err.error?.error ? err : "errore ignoto");    
+        }
+      });
+      
+    }
+
+  }
 
   title = 'GroupApp_frontend';
 
@@ -64,26 +98,16 @@ export class AppComponent {
 
   requests = false;
 
-  setUser(u: User){
-    this.user = u;
-    console.log(this.user);
-    if(this.topbar) this.topbar.user = this.user
-  }
-
   switchRequest(){
     this.requests = !this.requests;
   }
-
-  onName(filter: Filter){
-    this.events?.updateName(filter.name);
-  }
   
-  onFilter(filter: Filter){
-    console.log(filter);
-    console.log(filter.date.toDateString());
-    this.events?.updateFilter(filter);
-    this.onClick();
-  }
+  // onFilter(filter: Filter){
+  //   console.log(filter);
+  //   console.log(filter.date);
+  //   this.events?.updateFilter(filter);
+  //   this.onClick();
+  // }
 
   
 

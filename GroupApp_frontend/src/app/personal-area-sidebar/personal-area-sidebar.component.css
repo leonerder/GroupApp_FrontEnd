@@ -1,12 +1,13 @@
 
 .main-container{
-    width: 60%;
-    right: 1vw;
+    width: 50%;
+    right: -1.5vw;
 }
 
 .list-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    height: 100%;
 }
 
 .list{
@@ -34,7 +35,13 @@
     scrollbar-width: none;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
-    height: 20%;
+    height: 100%;
+    
+}
+
+.myEventsContainer > *:last-child{
+    padding-bottom: 20%;
+    
 }
 
 .title-container{

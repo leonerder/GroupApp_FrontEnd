@@ -4,21 +4,21 @@
         <mat-icon class="active-icon" (click)="close()">close</mat-icon>
     </div>
 
-    <div >
+    <div class="top-space">
         <form   [formGroup]="eventForm" (ngSubmit)="submitDraft()" class="filter-container" class="left-form">
-            <div>
+            <div class="filter-space">
                 <div class="field-div">
                 
-                    <label for="name" class="field-label"> Nome </label>
-                    <input type="text" name="name" id="name" formControlName="name" class="field-input" placeholder="">
+                    <label for="title" class="field-label"> Nome </label>
+                    <input type="text" id="title" formControlName="title" class="field-input">
                 </div>
                 
                 
                 
                 <div class="field-div">
                     
-                    <label for="type" class="field-label"> Tipo </label>
-                    <select name="selection" id="type" formControlName="type" class="field-input" placeholder="">
+                    <label for="category" class="field-label"> Tipo </label>
+                    <select name="selection" id="category" formControlName="category" class="field-input" placeholder="">
                         <option *ngFor="let t of types">{{t}}</option>
                     </select>
                 </div>
@@ -33,8 +33,8 @@
     
                 <div class="field-div" >
                     
-                    <label for="startDate" class="field-label"> Data di inizio </label>
-                    <input type="date" id="startDate" formControlName="startDate" class="field-input">
+                    <label for="date" class="field-label"> Data di inizio </label>
+                    <input type="date" id="date" formControlName="date" class="field-input">
                 </div>
                 
                 <div class="field-div">
@@ -44,20 +44,20 @@
                 </div>
             </div>
             
-            <div>
+            <div class="filter-space">
                 <div class="field-div">
                     <label for="price" class="field-label">Prezzo</label>
                     <input type="number" value="0" id="price" formControlName="price" class="field-input"   >
                 </div>
     
                 <div class="field-div">
-                    <label for="maxPartecipants" class="field-label">Partecipanti Massimi</label>
-                    <input type="number" value="1" id="maxPartecipants" formControlName="maxPartecipants" class="field-input"   >
+                    <label for="max_subs" class="field-label">Partecipanti Massimi</label>
+                    <input type="number" value="1" id="max_subs" formControlName="max_subs" class="field-input"   >
                 </div>
     
                 <div class="field-div description-div">
                     
-                    <label for="name" class="field-label"> Descrizione </label>
+                    <label for="description" class="field-label"> Descrizione </label>
                     <textarea name="description" id="description" formControlName="description" class="field-input description" placeholder=""></textarea>
                 </div>
 

@@ -1,50 +1,57 @@
 
     
 
-<div class="container">
+<div class="container" (mouseenter)="hovering = 'hovering'" (mouseleave)="hovering = 'out'">
     <mat-icon class="passive-icon">{{shown_icon}}</mat-icon>
-    <div class="interaction-container">
-        <div class="title-container">
-            <p class="title">{{event?.name}}</p> 
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-            <div>
-                
-                <div class="info-container">
-                    <p class="subtitle">Quando:</p>
-                    <p>{{event?.date?.getDay()}}/{{event?.date?.getMonth()}}/{{event?.date?.getFullYear()}}</p>
+    
+        <div class="interaction-container">
+            <div [@slide-text]="hovering" class="whole-container">
+                <div  class="title-container">
+                    <p class="title">{{event?.name}}</p> 
                 </div>
-                <div class="info-container">
-                    <p class="subtitle">Dove:</p>
-                    <p>{{event?.place}}</p>
+                <div class="fields-container">
+                    <div class="info-container">
+                        <p class="subtitle">Quando:</p>
+                        <p>{{date}}</p>
+                    </div>
+                    <div class="info-container">
+                        <p class="subtitle">Dove:</p>
+                        <p>{{event?.place}}</p>
+                    </div>
+                    <div *ngIf="hovering == 'hovering'" class="info-container">
+                        <p class="subtitle">Categoria:</p>
+                        <p>{{event?.target}}</p>
+                    </div>
+                    <div *ngIf="hovering == 'hovering'" class="info-container">
+                        <p class="subtitle">Posti Rimasti:</p>
+                        <p>{{remaining_places}}</p>
+                    </div>
+                    <div *ngIf="hovering == 'hovering'" class="info-container">
+                        <p class="subtitle">Costo:</p>
+                        <p>{{event.price == 0 ? 'Gratis' : event.price}}</p>
+                    </div>
                 </div>
-                <div class="info-container">
-                    <p class="subtitle">Categoria:</p>
-                    <p>{{event?.target}}</p>
-                </div>
-                <div class="info-container">
-                    <p class="subtitle">Posti Rimasti:</p>
-                    <p>{{event?.remaining_places()}}</p>
-                </div>
-                
             </div>
+            
+        
+
         </div>
         <div [ngSwitch]="request" class="button-container">
-            
-                <div *ngSwitchCase="false">
-                    <button class="button2">Partecipa</button>
-                </div>
-                <div *ngSwitchCase="true">
-                    <button class="button2">Accetta</button>
-                    <button class="button2">Rifiuta</button>
-                </div>
-                <div *ngSwitchDefault>evento undefined</div>
-                <mat-icon class="active-icon" (click)="emit_event()">info</mat-icon>
+            <div *ngSwitchCase='"Eventi"'>
+                <button class="button2" (click)="join()">Partecipa</button>
+            </div>
+            <div *ngSwitchCase='"Richieste"'>
+                <button class="button2 req-button" (click)="accept()">Accetta</button>
+                <button class="button2 req-button" (click)="reject()">Rifiuta</button>
+            </div>
+            <div *ngSwitchDefault>evento undefined</div>
+            <mat-icon class="active-icon" (click)="emit_event()">info</mat-icon>
+            <mat-icon class="active-icon" (click)="this.delete()">delete</mat-icon>
         </div>
         
-    </div>
-    <div class="gradient"></div>
-    <img src="../\public\assets\posters\example-poster.jpg" alt="poster" class="back-poster">
+        <div class="gradient"  alt="poster" [@slide]="hovering"></div>
+   
+    
 </div>
     
     

@@ -3,14 +3,14 @@
   <div class="background" >
     <div @goDark *ngIf="this.filter?.filterClicked=='open' ||  this.menu?.slideToggle == 'open' || this.personal?.slideToggle == 'open' || this.eventInfo?.isOpen == 'open' || this.create?.isOpen || this.login?.open" class="shield" (click)="clickOut()"></div>
     <!-- <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div> -->
-    <app-topbar #topbar (filter_out)="onName($event)" (menu_out)="toggleMenu($event)" (switchRequest)="switchRequest()"></app-topbar>
+    <app-topbar #topbar (menu_out)="toggleMenu($event)" (switchRequest)="switchRequest()"></app-topbar>
     <div class="app-container">
       <app-menu #menu ></app-menu>
-      <app-filter-sidebar #filters (filter_out)="onFilter($event)" (click_out)="onClick()"></app-filter-sidebar>
-      <app-personal-area-sidebar (eventInfo)="moreInfo($event)" (eventCreate)="openCreate()" #personal></app-personal-area-sidebar>
+      <app-filter-sidebar #filters (click_out)="onClick()"></app-filter-sidebar>
+      <app-personal-area-sidebar *ngIf="logged" (eventCreate)="openCreate()" #personal></app-personal-area-sidebar>
       <app-event-page #eventInfo></app-event-page>
-      <app-event-container #events (event_out)="moreInfo($event) "></app-event-container>
-      <app-login #login [purpose]="purp" (userOut)="setUser($event)"></app-login>
+      <app-event-container #events></app-event-container>
+      <app-login #login [purpose]="purp"></app-login>
       <app-event-create #create></app-event-create>
       <!-- add ngswitch for requests -->
     </div>

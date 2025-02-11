@@ -2,8 +2,54 @@
     <div class="title-container">
         <p class="title">Profilo</p>
     
-        <mat-icon class="active-icon" (click)="slideToggle='closed'">close</mat-icon>
+        <mat-icon class="active-icon close-icon" (click)="slideToggle='closed'">close</mat-icon>
         
+    </div>
+    <div class="info-container">
+        <p class="simpletext">
+            Questa sezione contiene informazioni personali facoltative, che possono essere aggiunte per facilitare la compilazione del modulo di organizzazione evento su suolo pubblico, vengono salvate sul dispositivo.
+        </p>
+        <div class="form-container">
+            <form [formGroup]="infoForm" (ngSubmit)="submitStorage()">
+                <div class="field-div">
+                    <label for="name" class="field-label">Nome e Cognome</label>
+                    <input type="text" id="name" formControlName="name" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="birthPlace" class="field-label">Luogo nascita</label>
+                    <input type="text" id="birthPlace" formControlName="birthPlace" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="birthDay" class="field-label">Data nascita</label>
+                    <input type="date" id="birthDay" formControlName="birthDay" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="CF" class="field-label">Codice Fiscale</label>
+                    <input type="text" id="CF" formControlName="CF" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="P" class="field-label">Provincia</label>
+                    <input type="text" id="P" formControlName="P" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="C" class="field-label">Comune</label>
+                    <input type="text" id="C" formControlName="C" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="address" class="field-label">Indirizzo</label>
+                    <input type="text" id="address" formControlName="address" class="field-input"   >
+                </div>
+                <div class="field-div">
+                    <label for="CAP" class="field-label">Cap</label>
+                    <input type="text" id="CAP" formControlName="CAP" class="field-input"   >
+                </div>
+            </form>
+        </div>
+        <div class="button-container">
+            <button type="submit" class="button2" (click)="submitStorage()">Salva</button>
+            <mat-icon class="active-icon" (click)="clear()">delete_forever</mat-icon>
+        </div>
+
     </div>
     
 </div>

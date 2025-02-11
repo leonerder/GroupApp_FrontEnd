@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatIcon } from '@angular/material/icon';
 import { User } from '../app.component';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api/api.service';
 
 
 @Component({
@@ -14,12 +14,12 @@ import { ApiService } from '../api.service';
   animations: [
     trigger('openLogin',[
           transition(':enter',[
-            style({transform: 'translateY(100%)'}),
+            style({transform: 'translateY(300%)'}),
             animate('0.3s ease', style({transform: 'translateY(0%)'}))
           ]),
           transition(':leave',[
             style({transform: 'translateY(0%)'}),
-            animate('0.3s ease', style({transform: 'translateY(120%)'})) //not working right
+            animate('0.3s ease', style({transform: 'translateY(300%)'})) //not working right
           ])
         ]),
   ],
@@ -30,9 +30,9 @@ import { ApiService } from '../api.service';
 export class LoginComponent {
   
   open = false;
+  state: 'visibility' | 'visibility_off' = 'visibility';
 
   @Input() purpose: 'login' | 'signup';
-  @Output() userOut = new EventEmitter<User>();
 
   err: string | null;
   shown: 'password' | 'text' = 'password';
@@ -75,19 +75,10 @@ export class LoginComponent {
       let info = this.apiService.access(user);
       info.subscribe((values: any) => {
         localStorage.setItem('token', values.token);
-        this.userOut.emit(new User(
-          values.user.mail,
-          values.user.password,
-          values.user.name,
-          values.user.surname,
-          values.user.dateOfBirth,
-          values.user._id,
-          values.user.isAdmin,
-          values.user.telephone
-        ))
+        console.log('salvo token')
+        window.location.reload();
+        
       });
-
-      this.userOut.emit();
      }
     
 
@@ -95,8 +86,24 @@ export class LoginComponent {
 
   signup(){
     if(this.signupform.valid){
+
+      let user =  {
+        email: this.signupform.value.email,
+        password: this.signupform.value.password,
+        name: this.signupform.value.name,
+        birthdate: this.signupform.value.date,
+        lastname: this.signupform.value.surname,
+        telephone: this.signupform.value.telephone
+      };
+      console.log(user);
+      let info = this.apiService.register(user);
+      info.subscribe((values: any) => {
+        localStorage.setItem('token', values.token);
+        console.log('salvo token')
+        window.location.reload();
         
-      //post dell'user
+      });
+      
      }
   }
 

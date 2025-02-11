@@ -1,20 +1,17 @@
 .main-container{
-    left: 10%;
-    width: 80%;
+    left: 25%;
+    width: 50%;
+    height: fit-content;
+    padding-bottom: 1.5%;
 }
 
 .horizontal{
     display: flex;
-    flex-wrap: wrap;
-}
-
-.left{
-    width: 70%;
-    padding: 3%;
-}
-
-.right{
-    width: 30%;
+    flex-direction: column;
+    height: fit-content;
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 100%;
 }
 
 .poster{
@@ -25,17 +22,33 @@
     border-radius: 12px;
     border: 1px solid var(--tertiary-color);
 }
+
 .poster:hover{
     opacity: 80%;
     cursor: pointer;
 }
 
+.parallel{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    height: fit-content;
+}
 
 .title{
     font-weight: bold;
     font-size: 30px;
     color: var(--tertiary-color);
-    margin: 2%;
+    margin: 4%;
+}
+
+.poster-container{
+    margin: 4%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
 }
 
 .subtitle{
@@ -43,6 +56,7 @@
     font-size: 18px;
     color: var(--secondary-color);
 }
+
 p{
     color: var(--tertiary-color);
     margin: 10px;
@@ -50,7 +64,11 @@ p{
 
 .text-box{
     display: flex;
-    align-items: center;
-    height: 2vh;
-    min-width: 30%;
+    margin-left: 4%;
+}
+
+.desc-box{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4%;
 }

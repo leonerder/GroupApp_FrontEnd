@@ -15,6 +15,14 @@
     justify-content: center;
 }
 
+.button-container{
+    display: flex;
+    align-items: center;
+    justify-content:  space-around;
+    width: 50%;
+
+}
+
 .title{
     font-size: 20px;
     color: var(--tertiary-color);
@@ -44,7 +52,7 @@
     font-weight: bold;
 }
 
-.active-icon{
+.close-icon{
     position: absolute;
     right: 12px;
     top: 12px;

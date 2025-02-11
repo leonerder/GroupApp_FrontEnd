@@ -2,8 +2,10 @@ import { NgClass, NgFor } from '@angular/common';
 import { booleanAttribute, Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { Event, Target, Type } from '../event-container/event-container.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { LinkingService } from '../services/linking/linking.service';
+import { start } from 'repl';
 
 
 @Component({
@@ -45,25 +47,26 @@ export class FilterSidebarComponent {
 
   event: Event = new Event();
 
-  filterForm = new FormGroup({
-    endDate: new FormControl(''),
-    startDate: new FormControl(''),
-    type: new FormControl(''),
-    target: new FormControl('')
-  })
+  filterForm: FormGroup
 
-  constructor(){
+  constructor(private linkingService: LinkingService,  private fb: FormBuilder) {
     this.clicked = false;
     this.filter = new Filter();
+    this.filterForm = this.fb.group({
+          startDate: ['', Validators.required],
+          place: ['', Validators.required],
+          target: ['', Validators.required],
+          type: ['', Validators.required],
+          price: [0, [Validators.required, Validators.min(0)]],
+      });
   }
 
   public submitFilters(){
     this.filter.type = this.filterForm.value.type as Type;
     this.filter.target = this.filterForm.value.target as Target;
-    this.filter.date = new Date(Date.parse(this.filterForm.value.startDate as string));
-    this.filter.endDate = new Date(Date.parse(this.filterForm.value.endDate as string));
-    console.log(this.filter.date.toDateString());
-    this.filter_out.emit(this.filter);
+    const startDateValue = this.filterForm.value.startDate as string;
+    this.filter.date = startDateValue ? new Date(Date.parse(startDateValue)) : new Date();
+    this.linkingService.updateFilters(this.filter);
   }
  
   public resetFilter(){
@@ -86,17 +89,14 @@ export class FilterSidebarComponent {
 export class Filter{
   private _name: string;
   private _startdate: Date;
-  
-  private _endDate: Date;
-  
+  private _price: number;
   private _type: Type;
-  
   private _target: Target;
 
-  constructor(name?: string, startDate?: Date, endDate?: Date, type?: Type, target?: Target){
+  constructor(name?: string, startDate?: Date, price?: number, type?: Type, target?: Target){
     this._name = name ? name : '';
-    this._startdate = startDate ? startDate : new Date('');
-    this._endDate = endDate ? endDate : new Date('');;
+    this._startdate = startDate ? startDate : new Date();
+    this._price = price ? price : 0;
     this._type = type ? type : Type.NULL;
     this._target = target ? target : Target.NULL;
   }
@@ -108,17 +108,18 @@ export class Filter{
   public set name(n: string){
     this._name=n;
   }
+
+  public get price(): number {
+    return this._price;
+  }
+  public set price(value: number) {
+    this._price = value;
+  }
   public get date(){
     return this._startdate as Date;
   }
   public set date(value: Date) {
     this._startdate = value;
-  }
-  public get endDate(): Date {
-    return this._endDate as Date;
-  }
-  public set endDate(value: Date) {
-    this._endDate = value;
   }
   public get type(): Type {
     return this._type as Type;

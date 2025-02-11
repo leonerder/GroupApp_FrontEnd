@@ -1,14 +1,11 @@
 
 .main-container{
     width: 30%;
+    height: fit-content;
     left: 35%;
+    padding-bottom: 3%;
 }
 
-.active-icon{
-    position: absolute;
-    right: 1vh;
-    top: 1vh;
-}
 .title-container{
     display: flex;
     align-items: center;
@@ -16,52 +13,27 @@
     padding: 3vh;
 }
 
-.filter-container{
+.password{
     display: flex;
-    flex-direction: column;
-    align-items: center ;
+    align-items: center;
+    justify-content: center;
 }
 
-.field-div{
-    display: flex;
-    margin: 10px;
-    
-    
-    height: 50px;
-    width: 300px; 
-    position: relative;
-    overflow: visible;
-}
 
-.field-div-selected{
-    border: 3px solid var(--accent-color);
-}
 
-.field-label{
-    color: var(--tertiary-color);
-    font-weight: bold;
-    font-size: 16px;
+.password-icon{
     position: absolute;
-    top: -10px;
-    left: 10px;
-    background-color: var(--primary-color);
-    padding-left: 5px;
-    padding-right: 5px;
+    right: 15%;
+    top: 50%;
 }
 
-.field-input{
-    border-radius: 5px;
-    border: 3px solid var(--secondary-color);
-    background-color: transparent;
+.button-container{
+    margin-top: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     width: 100%;
-    color: var(--tertiary-color);
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    outline:none;
+
 }
 
-.field-input:focus, .field-input:active{
-    border: 3px solid var(--accent-color);
-}
 

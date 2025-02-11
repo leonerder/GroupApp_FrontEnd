@@ -3,20 +3,20 @@
         <span class="home-button">
             <img src="../../../\public\assets\icons\logo_home.png" alt="home" class="home-img">
         </span>
-        <button class="element button1" >come funziona? </button>
     </div>
         <div class="sub-div center-div">
          <div style="display: flex; justify-content: space-between;" class="search-container">
-               <input class="search-bar" placeholder="Cerca.." type="text" (keyup)="updateFilter()" [(ngModel)]="filter_name">
+               <input class="search-bar" placeholder="Cerca.." type="text" (keydown.enter)="updateFilter()" [(ngModel)]="filter_name">
                <span class="search-icon-background">
                   <mat-icon class="search-icon">search</mat-icon>
               </span>
         </div>
     </div>
     <div class="sub-div right-div">
-        <button *ngIf="user?.isAdmin" class="element button2" (click)="switchRequest.emit()">richieste</button>
+        <button *ngIf="user?.isAdmin" class="element button2" (click)="switchReq()">{{mesSwitch == "Richieste" ? "Eventi" : "Richieste"}}</button>
         <div [ngSwitch]="user" class="button-container">
-            <mat-icon *ngSwitchDefault  class="active-icon" (click)="this.menu_out.emit(0)">manage_accounts</mat-icon>
+            <button *ngSwitchDefault class="button2" (click)="logOut()">Esci</button>
+            <mat-icon *ngSwitchDefault  class="active-icon" (click)="openMenu()">manage_accounts</mat-icon>
             <div *ngSwitchCase="undefined" >
                 <button  class="button2" (click)="this.menu_out.emit(2)">Iscriviti</button>
                 <button  class="button2" (click)="this.menu_out.emit(1)">Accedi</button>

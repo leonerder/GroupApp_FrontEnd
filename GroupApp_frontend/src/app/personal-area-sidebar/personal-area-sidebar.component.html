@@ -6,13 +6,16 @@
     <div class="list-container">
         <div class="list">
             <p class="subtitle">Eventi a cui partecipi</p>
-            <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+            <app-eventcard-reduced *ngFor="let e of mySubs" [event]="e" class="card" [purpose]="'partecipation'" ></app-eventcard-reduced>
         </div>
         
         <div class="list">
             <p class="subtitle">I tuoi eventi</p>
-
-            <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" (eventInfo)="eventInfo.emit($event)" ></app-eventcard-reduced>
+            <div class="myEventsContainer">
+                <app-eventcard-reduced *ngFor="let e of myEvents" [event]="e" class="card" [purpose]="'own'" ></app-eventcard-reduced>
+                <app-eventcard-reduced *ngFor="let e of myDrafts" [event]="e" class="card" [purpose]="'own'" ></app-eventcard-reduced>
+            </div>
+            
         </div>
             
         

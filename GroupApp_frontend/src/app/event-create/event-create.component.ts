@@ -1,10 +1,14 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { Event, Target, Type } from '../event-container/event-container.component';
 import { PDFDocument } from 'pdf-lib';
+import { ApiService } from '../services/api/api.service';
+import { LinkingService } from '../services/linking/linking.service';
+import { User } from '../app.component';
+import { link } from 'fs';
 
 
 @Component({
@@ -37,20 +41,26 @@ export class EventCreateComponent {
 
   valErr: boolean = false;
   err: string = '';
+  eventForm;
+  user: User | null;
 
-  eventForm = new FormGroup({
-      name: new FormControl(this.ev.name, Validators.required),
-      startDate: new FormControl(this.ev.date,Validators.required),
-      place: new FormControl(this.ev.place,Validators.required),
-      type: new FormControl(this.ev.type,Validators.required),
-      target: new FormControl(this.ev.target,Validators.required),
-      price: new FormControl(this.ev.price,Validators.required),
-      description: new FormControl(this.ev.description,Validators.required),
-      maxPartecipants: new FormControl(this.ev.maxPartecipants, Validators.required),
+  constructor(private apiService: ApiService, private linkService: LinkingService, private fb: FormBuilder){
+    this.user = null;
+    apiService.getUser().subscribe({
+      next: (u) => this.user = u,
+      error: (err) => console.log(err)
     })
-
-  constructor(){
-    this.isOpen =false;
+    this.isOpen = false;
+    this.eventForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      date: ['', Validators.required],
+      place: ['', Validators.required],
+      target: ['', Validators.required],
+      category: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
+      max_subs: [1, [Validators.required, Validators.min(1)]],
+      description: ['', [Validators.required]]
+    });
   }
 
   close(){
@@ -60,22 +70,29 @@ export class EventCreateComponent {
   submitDraft(){
     this.err = '';
     this.valErr = false;
-    if(this.eventForm.valid){
-      let event = new Event();
-      event.name = this.eventForm.value.name ? this.eventForm.value.name : '';
-      event.date = this.eventForm.value.startDate ? new Date(this.eventForm.value.startDate) : new Date('');
-      event.place = this.eventForm.value.place ? this.eventForm.value.place : '';
-      event.type = this.eventForm.value.type ? this.eventForm.value.type : Type.NULL;
-      event.target = this.eventForm.value.target ? this.eventForm.value.target : Target.NULL;
-      event.price = this.eventForm.value.price ? this.eventForm.value.price : 0;
-      event.description = this.eventForm.value.description ? this.eventForm.value.description : '';
-      event.maxPartecipants = this.eventForm.value.maxPartecipants ? this.eventForm.value.maxPartecipants : 0;
-      event.actualPartecipants = 0;
-      
-
+    let event = {
+        title: this.eventForm.value.title,
+        date: this.eventForm.value.date,
+        location: this.eventForm.value.place,
+        category: this.eventForm.value.category,
+        target: this.eventForm.value.target,
+        price: this.eventForm.value.price,
+        description: this.eventForm.value.description,
+        max_subs: this.eventForm.value.max_subs
+      }
       console.log(event);
-
+    if(this.eventForm.valid){
+      this.apiService.createDraft(event).subscribe({
+        next: (d) => {
+          console.log(d);
+          this.linkService.updateReload(true);
+        },
+        error: (err) => console.log(err)
+      });
+      this.isOpen = false;
+      this.linkService.updateDraft();
     } else {
+      
       console.log('tutti i campi sono obbligatori');
       this.err += 'attenzione, tutti i campi sono obbligatori';
       this.valErr = true;
@@ -86,36 +103,44 @@ export class EventCreateComponent {
 
 
   async savePdf(){
-    const url = 'assets/file/M0608_agg.pdf';  // Modifica con il percorso del tuo file PDF
+    const url = 'assets/file/M0608_agg.pdf';
 
-    // Carica il PDF esistente come array di byte
     const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
-
-    // Carica il documento PDF con pdf-lib
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-    // Ottieni il modulo del PDF
     const form = pdfDoc.getForm();
 
     const fieldNames = form.getFields().map(field => field.getName());
     console.log(fieldNames);
 
-    // Modifica i campi del modulo
-    form.getTextField('2').setText('Mario Rossi');  // Modifica il campo "nome"
-    form.getTextField('3').setText('Via Roma 123');  // Modifica il campo "indirizzo"
+    form.getTextField('2').setText(localStorage.getItem('name') || '');  
+    form.getTextField('3').setText(localStorage.getItem('birthPlace') || '');
     
-    // Puoi aggiungere altre modifiche, come la compilazione di altri campi, se presenti
+    const eventDate = new Date(localStorage.getItem('birthDay') ?? this.user?.birthdate ?? '');
+    if(eventDate != new Date()){
+      const year = eventDate.getFullYear();
+      const month = ('0' + (eventDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + eventDate.getDate()).slice(-2);
+      const formattedDate = `${day}/${month}/${year}`;
+      form.getTextField('4').setText(formattedDate); 
+    }
     
-    // Salva il PDF modificato
+    form.getTextField('5').setText(localStorage.getItem('CF') || ''); 
+    form.getTextField('6').setText(localStorage.getItem('P') || ''); 
+    form.getTextField('7').setText(localStorage.getItem('C') || ''); 
+    form.getTextField('8').setText(localStorage.getItem('address') || ''); 
+    form.getTextField('9').setText(localStorage.getItem('CAP') || ''); 
+    if(this.user){
+      form.getTextField('10').setText(this.user.telephone.toString());
+      form.getTextField('11').setText(this.user.email);
+    }
+    
     const pdfBytes = await pdfDoc.save();
 
-    // Crea un blob dal PDF modificato
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
 
-    // Crea un link per il download
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'modificato_copia.pdf';  // Nome della copia modificata
+    link.download = 'modulo_organizzazione.pdf';
     link.click();
   }
 

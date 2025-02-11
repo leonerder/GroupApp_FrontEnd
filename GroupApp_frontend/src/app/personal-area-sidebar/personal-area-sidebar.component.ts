@@ -5,6 +5,8 @@ import { EventcardReducedComponent } from '../eventcard-reduced/eventcard-reduce
 import { Event, Target, Type } from '../event-container/event-container.component';
 import { NgFor, NgIf } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs'; 
+import { ApiService } from '../services/api/api.service';
+import { LinkingService } from '../services/linking/linking.service';
 
 @Component({
   selector: 'app-personal-area-sidebar',
@@ -68,27 +70,107 @@ import { MatTabsModule } from '@angular/material/tabs';
 export class PersonalAreaSidebarComponent {
   @Input() slideToggle: 'open' | 'closed' = 'closed';
 
-  @Output() eventInfo = new EventEmitter<Event>();
   @Output() eventCreate = new EventEmitter();
 
-  myEvents: Event[] | undefined = []; 
+  mySubs: Event[] = [];
+  myEvents: Event[] = []; 
+  myDrafts: Event[] = [];
 
   openCreateMenu: 'open' | 'closed' = 'closed';
 
-  constructor(){
-    if(this.myEvents){
-      let ev = new Event();
-            ev.name = 'Partita';
-            ev.date = new Date();
-            ev.place = 'ez';
-            ev.description = 'vieni susu';
-            ev.type = Type.CULTURA;
-            ev.target = Target.ADULTS;
-            ev.price = 0;
-            ev.maxPartecipants = 100;
-            ev.actualPartecipants = 0;
-            this.myEvents.push(ev);
-    }
+  constructor(private apiService: ApiService, private linkService: LinkingService){
+    linkService.getReload().subscribe({
+      next: (data) => this.ngOnInit(),
+      error: (err) => console.log(err)
+    })
+
+    linkService.getDraftCreated().subscribe({
+      next: () => this.slideToggle = 'open',
+      error: (err) => console.log(err)
+    })
+
+    linkService.getEvent().subscribe({
+      next: () => this.slideToggle = 'closed',
+      error: (err) => console.log(err),
+    })
+  
+  }
+
+  ngOnInit(){
+    this.populate()
+  }
+
+  populate(){
+    this.apiService.getSubscribedEvents().subscribe({
+      next: (data: any) => {
+        this.mySubs = [];
+        console.log(data)
+          
+        for(let e = 0; e<data.length; e++){
+          let ev = new Event();
+          ev.id = data[e]._id,
+          ev.date = new Date(data[e].date);
+          ev.name = data[e].title;
+          ev.description = data[e].description;
+          ev.maxPartecipants = data[e].max_subs;
+          ev.target = data[e].target;
+          ev.type = data[e].category;
+          ev.price = data[e].price;
+          ev.place = data[e].location;
+          this.mySubs.push(ev);
+          console.warn(ev)
+          
+        }
+      },
+      error: (err) => console.log(err)
+    });
+
+    this.apiService.getOrganizedDraft().subscribe({
+      next: (data: any) => {
+        this.myDrafts = [];
+        //console.log(data)
+          
+        for(let e = 0; e<data.length; e++){
+          let ev = new Event();
+          ev.id = data[e]._id,
+          ev.date = new Date(data[e].date);
+          ev.name = data[e].title;
+          ev.description = data[e].description;
+          ev.maxPartecipants = data[e].max_subs;
+          ev.target = data[e].target;
+          ev.type = data[e].category;
+          ev.price = data[e].price;
+          ev.place = data[e].location;
+          this.myDrafts.push(ev);
+          //console.warn(ev)
+          
+        }
+      },
+      error: (err) => console.log(err)
+    });
+
+    this.apiService.getOrganizedEvents().subscribe({
+      next: (data: any) => {
+        this.myEvents = [];
+        //console.log(data)
+          
+        for(let e = 0; e<data.length; e++){
+          let ev = new Event();
+          ev.id = data[e]._id,
+          ev.date = new Date(data[e].date);
+          ev.name = data[e].title;
+          ev.description = data[e].description;
+          ev.maxPartecipants = data[e].max_subs;
+          ev.target = data[e].target;
+          ev.type = data[e].category;
+          ev.price = data[e].price;
+          ev.place = data[e].location;
+          this.myEvents.push(ev);
+          //console.warn(ev)
+        }
+      },
+      error: (err) => console.log(err)
+    })
   }
   
   onClick(){

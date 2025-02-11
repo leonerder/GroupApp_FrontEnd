@@ -7,6 +7,18 @@
     
 }
 
+.top-space{
+    height:60%;
+}
+
+.filter-space{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+}
+
 .left-form{
     display: flex;
     justify-content: left;
@@ -32,54 +44,25 @@
 .filter-container{
     display: flex;
     flex-direction: column;
-    align-items: center ;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
+
 
 .field-div{
     display: flex;
-    margin: 10px;
+    margin: 5%;           
     
     
     height: 50px;
-    width: 300px; 
+    width: 100%; 
     position: relative;
     overflow: visible;
 }
 
 .description-div{
     height: 60%;
-}
-
-.field-div-selected{
-    border: 3px solid var(--accent-color);
-}
-
-.field-label{
-    color: var(--tertiary-color);
-    font-weight: bold;
-    font-size: 16px;
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background-color: var(--primary-color);
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.field-input{
-    border-radius: 5px;
-    border: 3px solid var(--secondary-color);
-    background-color: transparent;
-    width: 100%;
-    color: var(--tertiary-color);
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    outline:none;
-}
-
-.field-input:focus, .field-input:active{
-    border: 3px solid var(--accent-color);
 }
 
 .button-container{
@@ -89,17 +72,23 @@
     justify-content: center;
 }
 
-.text-container{
-    width: 80%;
-    height: fit-content;
-    overflow: visible;
-}
+
 
 
 .description{
     padding-top: 10px;
     resize: none;
     scrollbar-width: none;
+}
+
+.validator-container{
+    margin: 10px;
+}
+
+.text-container{
+    width: 80%;
+    height: fit-content;
+    overflow: visible;
 }
 
 
