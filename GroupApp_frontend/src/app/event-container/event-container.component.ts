@@ -253,9 +253,10 @@ export class Event{
 }
 
 export enum Type{
+  NULL = '',
   SPORT = "Sport",
   CULTURA = "Cultura",
-  NULL = ''
+  
 }
 
 export enum Target{
