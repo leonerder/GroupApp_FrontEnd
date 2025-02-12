@@ -43,15 +43,15 @@ export class ApiService {
 
   createDraft(event: any){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`)
-    return this.http.post('http://localhost:3000/event/create',event,{headers});   
+    return this.http.post(this.url+'event/create',event,{headers});   
   }
 
   getEvents(s: number): Observable<any[]>{
-    return this.http.get<any[]>(this.url + "/event/unfiltered" + '?start=' + s); 
+    return this.http.get<any[]>(this.url + "event/unfiltered" + '?start=' + s); 
   }
 
   getEventsFiltered(s: number, filter: Filter | null): Observable<any[]>{
-    let searchurl = this.url+'/event/filtered?';
+    let searchurl = this.url+'event/filtered?';
     if(s!=0) searchurl += 'start=' + s;
     if(filter?.date) {
       const yyyy = filter.date.getFullYear();
@@ -69,26 +69,26 @@ export class ApiService {
 
   delete_event(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/control/event?id=${id}`, {headers});
+    return this.http.delete(this.url+`control/event?id=${id}`, {headers});
   }
 
   delete_draft(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/control/draft?id=${id}`, {headers});
+    return this.http.delete(this.url+`control/draft?id=${id}`, {headers});
   }
 
   delete_event_owner(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/event/delete_event?id=${id}`, {headers});
+    return this.http.delete(this.url+`event/delete_event?id=${id}`, {headers});
   }
 
   delete_draft_owner(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/event/delete_draft?id=${id}`, {headers});
+    return this.http.delete(this.url+`event/delete_draft?id=${id}`, {headers});
   }
 
   getDraftsFiltered(s: number, filter: Filter | null): Observable<any[]>{
-    let searchurl = this.url+'/control/drafts?';
+    let searchurl = this.url+'control/drafts?';
     if(s!=0) searchurl += 'start=' + s;
     if(filter?.date) {
       const yyyy = filter.date.getFullYear();
@@ -107,7 +107,7 @@ export class ApiService {
   }
 
   register(user: any){
-    return this.http.post('http://localhost:3000/registration', {
+    return this.http.post(this.url + 'registration', {
       mail: user.email,
       password: user.password,
       name: user.name,
@@ -118,59 +118,59 @@ export class ApiService {
   }
 
   access(loginInfo: any){
-    return this.http.post('http://localhost:3000/access', loginInfo);
+    return this.http.post(this.url + 'access', loginInfo);
   }
 
   token_access(){
     
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`)
-    return this.http.post(this.url+'/access/token_access', { token: this.token }, {headers});
+    return this.http.post(this.url+'access/token_access', { token: this.token }, {headers});
   }
 
   accept_draft(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`)
-    return this.http.post(this.url+`/control/approve`,{id: id}, {headers});
+    return this.http.post(this.url+`control/approve`,{id: id}, {headers});
   }
 
   reject_draft(id: string){
     const headers =  this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/control/draft?id=${id}`, {headers});
+    return this.http.delete(this.url+`control/draft?id=${id}`, {headers});
 
   }
 
 
   partecipate(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.post(this.url+`/partecipation/join`, {event: id}, {headers});
+    return this.http.post(this.url+`partecipation/join`, {event: id}, {headers});
   }
 
   unpartecipate(id: string){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.delete(this.url+`/partecipation/leave?event=${id}`,{headers});
+    return this.http.delete(this.url+`partecipation/leave?event=${id}`,{headers});
   }
 
   getPartecipations(id: string){
-    return this.http.get(this.url+`/event/partecipants?id=${id}`);
+    return this.http.get(this.url+`event/partecipants?id=${id}`);
   }
 
   getSubscribedEvents(){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.get(this.url+`/event/yourPartecipations?start=0`, {headers});
+    return this.http.get(this.url+`event/yourPartecipations?start=0`, {headers});
   }
 
   getOrganizedEvents(){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.get(this.url+`/event/yourEvents?start=0`, {headers});
+    return this.http.get(this.url+`event/yourEvents?start=0`, {headers});
   }
 
   getOrganizedDraft(){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.get(this.url+`/event/yourDrafts?start=0`, {headers});
+    return this.http.get(this.url+`event/yourDrafts?start=0`, {headers});
   }
 
   createEvent(e: any){
     const headers = this.headers.set("Authorization", `Bearer ${this.token}`);
-    return this.http.post(this.url+`/event/create`, {headers});
+    return this.http.post(this.url+`event/create`, {headers});
   }
 
   
