@@ -10,7 +10,7 @@ import { Filter } from '../../filter-sidebar/filter-sidebar.component';
   providedIn: 'root'
 })
 export class ApiService {
-  private url: string = 'https://backendgroupapp.onrender.com/';
+  private url: string = 'https://backendgroupapp.onrender.com';
   private http: HttpClient;
   private headers: HttpHeaders;
   private user = new Subject<User>();
