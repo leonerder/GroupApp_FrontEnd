@@ -86,6 +86,7 @@
     transform: scale(1.5);
 }
 
+
 .home-button{
     position: relative;
     display: flex;
@@ -99,8 +100,10 @@
 }
 
 .home-img{
-
+    background-size: cover;
+    background-image: url("/GroupApp_frontend/public/logo_home.png");
     height: 80px;
+    width: 80px;
 }
 
 
