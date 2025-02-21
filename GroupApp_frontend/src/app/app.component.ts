@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { LoginOption, TopbarComponent } from './topbar/topbar.component';
 import { Event, EventContainerComponent } from './event-container/event-container.component';
 import { Filter } from './topbar/topbar.component';
@@ -13,12 +13,17 @@ import { EventCreateComponent } from './event-create/event-create.component';
 import { exitCode } from 'node:process';
 import { LoginComponent } from './login/login.component';
 import { ApiService } from './services/api/api.service';
+import { AlertComponent, AlertTypes } from './alert/alert.component';
+import { NotificationTabComponent } from './notification-tab/notification-tab.component';
+import { LoaderComponent } from './loader/loader.component';
+import { LinkingService } from './services/linking/linking.service';
+import { error } from 'node:console';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent, LoginComponent],
+  imports: [RouterOutlet,LoaderComponent, NotificationTabComponent,AlertComponent, TopbarComponent, EventContainerComponent, FilterSidebarComponent, MenuComponent, CommonModule, PersonalAreaSidebarComponent, EventPageComponent,EventCreateComponent, LoginComponent],
   templateUrl: './app.component.html',
   animations:[
     trigger('goDark',[
@@ -40,7 +45,9 @@ import { ApiService } from './services/api/api.service';
 export class AppComponent {
   logged = false;
 
-  constructor(private apiService: ApiService){}
+  constructor(private apiService: ApiService, private linkService: LinkingService, private router: Router){
+    
+  }
 
   ngOnInit(){
     const token = localStorage.getItem("token");
@@ -61,9 +68,11 @@ export class AppComponent {
           user.token = token;
           this.apiService.updateUser(user);
           this.logged = true;
+          this.linkService.updateAlert(["accesso automatico avvenuto con successo", AlertTypes.INFO])
         },
         
         error: (err) => {
+          this.linkService.updateAlert(["token d'accesso scaduto, eseguire nuovamente l'accesso", AlertTypes.ERROR])
           console.error('Errore:', err.error?.error ? err : "errore ignoto");    
         }
       });

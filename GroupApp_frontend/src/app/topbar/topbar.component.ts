@@ -60,9 +60,18 @@ export class TopbarComponent {
   switchReq(){
     this.mesSwitch = this.mesSwitch == "Richieste" ? "Eventi" : "Richieste";
     this.linkService.sendList(this.mesSwitch);
-}
+  }
 
+  notificationToggle(){
+    const button = document.querySelector('.button1');
+    if (button) {
+      button.classList.toggle('button1-active');
+    }
+  }
 
+  openNotificationTab(){
+    this.linkService.openNotification();
+  }
 
 
 

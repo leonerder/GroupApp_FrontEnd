@@ -3,9 +3,18 @@
     height: 471px;
     width: 380px;
     margin: 1vh 1vw 1vh 1vw;
-    border-radius: 12px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border: 2px solid var(--tertiary-color);
+} 
+
+.main-container{
+    position: relative;
+    margin: 1vh 1vw 1vh 1vw;
+    height: 550px;
+    width: 385px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color: var(--tertiary-color);
+    border: none
 }
 
 .back-poster{
@@ -38,10 +47,20 @@
     background-image: url('/assets/posters/example-poster.jpg');
     background-position:top;
     background-size:contain;
-    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%);
-    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%);
+    /* -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%);
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0) 50%, black 80%, black 100%); */
     /* background: linear-gradient(-90deg, rgba(0,0,0,0) 0%, var(--secondary-color) 70%, var(--secondary-color) 10%); */
 }
+
+.fade {
+    animation: fadeEffect 200ms ease-in-out forwards;
+}
+
+@keyframes fadeEffect {
+    0% { opacity: 1; }   
+    100% { opacity: 0.5; } 
+}
+
 
 .interaction-container{
     position:absolute;
@@ -55,13 +74,17 @@
 }
 
 .whole-container{
+    padding-top: 5%;
+    overflow: visible;
     position: absolute;
     height: 100%;
     width: 100%;
-    top: 50%;
+    top: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+    background-color: var(--primary-color);
 }
 
 .info-container{
@@ -75,19 +98,19 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    align-items: center;
     justify-content: top;
 }
 .button-container{
     position: absolute;
     z-index: 6;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    background-color: var(--primary-color);
     padding: 5px;
     display: flex;
     align-items: center;
     bottom: 2%;
+    height: 10%;
+    width: 100%;
 }
 
 .title-container{
@@ -106,6 +129,20 @@
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.price-container{
+    position: absolute;
+    z-index: 10;
+    left: 5%;
+    top: -5%;
+    font-size: 24;
+    border-radius: 3px;
+    background-color: var(--tertiary-color);
+    padding: 4%;
+    height: fit-content;
+    width: fit-content;
 }
 
 .info-container-description{

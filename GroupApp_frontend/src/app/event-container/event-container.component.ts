@@ -1,17 +1,18 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { EventcardComponent } from '../eventcard/eventcard.component';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Filter } from '../topbar/topbar.component';
 import { ApiService } from '../services/api/api.service';
 import {  HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { LinkingService } from '../services/linking/linking.service';
 import { User } from '../app.component';
 import { link } from 'fs';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-event-container',
   standalone: true,
-  imports: [CommonModule, EventcardComponent],
+  imports: [CommonModule, NgIf, LoaderComponent, EventcardComponent],
   templateUrl: './event-container.component.html',
   styleUrl: './event-container.component.css'
 })
@@ -22,10 +23,17 @@ export class EventContainerComponent {
   private filters: Filter;
   private events: Event[];
   purpose: 'Richieste' | 'Eventi' = 'Eventi';
+  load = false;
   start = 0;
   justAdd = false;
 
   constructor(private apiService: ApiService, private listService: LinkingService){
+    
+    listService.getLoader().subscribe({
+      next: (data) => this.load = !data,
+      error:(err) => console.log(err)
+    })
+    
     listService.getList().subscribe({
       next: (p) => {
         this.purpose = p
@@ -76,6 +84,7 @@ export class EventContainerComponent {
   }
 
   private populate(){
+      
       this.apiService.getEventsFiltered(this.start, this.filters).subscribe({
         next: (data: string | any[]) => {
               if(!this.justAdd) this.events = [];

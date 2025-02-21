@@ -5,6 +5,7 @@ import { MatIcon } from '@angular/material/icon';
 import { NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 import { ApiService } from '../services/api/api.service';
 import { LinkingService } from '../services/linking/linking.service';
+import VanillaTilt from 'vanilla-tilt'
 
 @Component({
   selector: 'app-eventcard',
@@ -24,12 +25,12 @@ import { LinkingService } from '../services/linking/linking.service';
     trigger('slide', [
       state('hovering',
         style({
-          transform: 'translateY(-60%)'
+          transform: "opacity(100%)"
         })
       ),
       state('out',
         style({
-          transform: 'translateY(0%)'
+          transform: "opacity(50%)"
         })
       ),
       transition('*=> out', [animate('0.3s ease')]),
@@ -57,7 +58,7 @@ import { LinkingService } from '../services/linking/linking.service';
 export class EventcardComponent {
   @Input() event: Event = new Event();
   @Input() request: "Richieste" | "Eventi" = "Eventi";
-  
+
   hovering : 'hovering' | 'out' = 'out'
   shown_icon: string = "question_mark";
   date: string = "";
@@ -71,6 +72,7 @@ export class EventcardComponent {
   }
 
   ngOnInit(){
+    VanillaTilt.init(document.querySelector('.vanilla-tilt') as any)
     if (this.event?.date) {
       const eventDate = new Date(this.event.date);
       const year = eventDate.getFullYear();
@@ -124,7 +126,6 @@ export class EventcardComponent {
       }
     }
   }
-
   accept(){
     this.apiService.accept_draft(this.event.id).subscribe({
       next: (data) => {

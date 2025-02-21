@@ -1,0 +1,13 @@
+.alert-container{
+    position: absolute;
+    padding: 1%;
+    width: 30%;
+    height: 10%;
+    left: 35%;
+    top: 5%;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+}

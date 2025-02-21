@@ -1,13 +1,16 @@
 
     
 
-<div class="container" (mouseenter)="hovering = 'hovering'" (mouseleave)="hovering = 'out'">
+<div class="main-container vanilla-tilt" (mouseenter)="hovering = 'hovering'" (mouseleave)="hovering = 'out'" data-tilt data-tilt-reverse="true" data-tilt-max="5">
     <mat-icon class="passive-icon">{{shown_icon}}</mat-icon>
     
         <div class="interaction-container">
             <div [@slide-text]="hovering" class="whole-container">
+                <div class="info-container price-container">
+                    <p>{{event.price == 0 ? 'Gratis' : event.price + '€'}}</p>
+                </div>
                 <div  class="title-container">
-                    <p class="title">{{event?.name}}</p> 
+                    <p class="title">{{event.name}}</p> 
                 </div>
                 <div class="fields-container">
                     <div class="info-container">
@@ -16,20 +19,17 @@
                     </div>
                     <div class="info-container">
                         <p class="subtitle">Dove:</p>
-                        <p>{{event?.place}}</p>
+                        <p>{{event.place}}</p>
                     </div>
                     <div *ngIf="hovering == 'hovering'" class="info-container">
                         <p class="subtitle">Categoria:</p>
-                        <p>{{event?.target}}</p>
+                        <p>{{event.target}}</p>
                     </div>
                     <div *ngIf="hovering == 'hovering'" class="info-container">
                         <p class="subtitle">Posti Rimasti:</p>
                         <p>{{remaining_places}}</p>
                     </div>
-                    <div *ngIf="hovering == 'hovering'" class="info-container">
-                        <p class="subtitle">Costo:</p>
-                        <p>{{event.price == 0 ? 'Gratis' : event.price}}</p>
-                    </div>
+                
                 </div>
             </div>
             
@@ -49,9 +49,7 @@
             <mat-icon *ngif="admin" class="active-icon" (click)="this.delete()">delete</mat-icon>
         </div>
         
-        <div class="gradient"  alt="poster" [@slide]="hovering"></div>
-   
-    
+        <div class="gradient" [class.fade]="hovering == 'hovering'"  alt="poster" [@slide]="hovering"></div>
 </div>
     
     

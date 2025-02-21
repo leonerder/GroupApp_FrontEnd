@@ -5,12 +5,15 @@
     --tertiary-color: #005463;
     --accent-color: #fa9038; */
 
-    --primary-color: #e6f4f1;
+    /* --primary-color: #e6f4f1;
     --secondary-color: #0e8ba9;
     --tertiary-color: #002b44;
-    --accent-color: #ecad38;
+    --accent-color: #ecad38; */
 
-    
+    --primary-color: #f2f2f2;
+    --secondary-color: #63ae25;
+    --tertiary-color: #00628b;
+    --accent-color: #83b81a;
 
 }
 
@@ -31,16 +34,18 @@ div{
     padding-top: 10px;
     padding-bottom: 10px;
     cursor: pointer;
-    background-color: var(--accent-color);  
-    border-radius: 6px;
+    background-color: var(--tertiary-color);  
+    border-radius: 3px;
     border: none;
-    color: var(--tertiary-color);
+    color: var(--primary-color);
     font-size: 18px;
     font-weight: bold;
-    border: 1px solid var(--tertiary-color);
+    /* border: 1px solid var(--accent-color); */
 }
 
 .button2:active{
+    background-color: var(--accent-color);
+    color: var(--tertiary-color);
     box-shadow: 0px 0px 25px 4px rgba(0,0,0,0.1);
 }
 
@@ -58,10 +63,9 @@ div{
     border: 2px solid var(--tertiary-color);
 } 
 
-.button1:hover{
+.button1-active{
     border: 2px solid var(--accent-color);
     border-radius: 6px;
-
 }
 
 .button1:active{
@@ -75,7 +79,7 @@ div{
     z-index: 2;
     top: 4%;
     background-color: var(--primary-color);
-    border-radius: 20px;
+    border-radius: 6px;
     border: 3px solid var(--tertiary-color);
     display: flex;
     flex-direction: column;
@@ -85,20 +89,32 @@ div{
 .passive-icon{  
     transform: scale(1.3);
     padding: 3px;
-    color: var(--accent-color);
-    background-color: var(--tertiary-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 8px;
+    color: var(--tertiary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--tertiary-color);
+    border-radius: 3px;
 }
 
 .active-icon{
+    color: var(--primary-color);
+    background-color: var(--tertiary-color);
+    padding: 4px;
+    transform: scale(1.3);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.active-simple-icon{
     color: var(--tertiary-color);
-    background-color: var(--accent-color);
-    border: 1px solid var(--tertiary-color);
+    background-color: var(--primary-color);
     padding: 3px;
     transform: scale(1.3);
     border-radius: 8px;
     cursor: pointer;
+}
+
+.active-simple-icon:hover{
+    color: var(--accent-color);
 }
 
 .close-icon{
@@ -143,7 +159,7 @@ div{
 
 .field-input{
     border-radius: 5px;
-    border: 3px solid var(--secondary-color);
+    border: 3px solid var(--tertiary-color);
     background-color: transparent;
     width: 100%;
     color: var(--tertiary-color);
@@ -158,12 +174,14 @@ div{
 }
 
 p{
+    
     color: var(--primary-color);
     margin: 0px;
 }
 
 .subtitle{
     color: var(--tertiary-color);
+    font-family: "Myriad Pro Condensed Italic", sans-serif;
     font-size: 18px;
     margin-bottom: 0px;
 }
@@ -183,11 +201,11 @@ p{
 .simpletext{
     color: var(--tertiary-color);
     font-size: 14px;
-    margin-bottom: 0px;
+    margin: none;
 }
 
 html, body { height: 100%; }
-body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; padding: 0; font-family: "Myriad Pro Condensed Italic", Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family:"Myriad Pro Regular", Roboto, "Helvetica Neue", sans-serif; }

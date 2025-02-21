@@ -1,0 +1,18 @@
+<div @openNotification *ngIf="isOpen" class="main-container notification-tab">
+    <div class="title-container">
+        <p class="title">Notifiche</p>
+    </div>
+    
+    <div class="notification-container" *ngFor="let e of notifications">
+        <div class="notification">
+            <a class="simpletext">
+                {{e.message}}
+            </a>
+            <div class="icon-container">
+                <mat-icon (click)="delete(e.id)" class="active-simple-icon">delete_outline</mat-icon>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

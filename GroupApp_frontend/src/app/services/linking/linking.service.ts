@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { AlertTypes } from '../../alert/alert.component';
 import { User } from '../../app.component';
 import { Filter } from '../../filter-sidebar/filter-sidebar.component';
 import { Event } from '../../event-container/event-container.component';
@@ -15,6 +16,9 @@ export class LinkingService {
   private draftCreated = new Subject<any>();
   private menu = new Subject<any>();
   private eventInfo = new Subject<Event>();
+  private alerText = new Subject<[string, AlertTypes]>();
+  private Notification = new Subject();
+  private Loading = new Subject<boolean>();
 
   constructor() { 
     this.getFilters().subscribe({
@@ -23,6 +27,34 @@ export class LinkingService {
       },
       error: (err) => console.log(err)
     })
+  }
+
+  openLoader(){
+    this.Loading.next(true);
+  }
+
+  closeLoader(){
+    this.Loading.next(false);
+  }
+
+  getLoader(){
+    return this.Loading.asObservable()
+  }
+
+  openNotification(){
+    this.Notification.next({})
+  }
+
+  getNotification(){
+    return this.Notification.asObservable();
+  }
+
+  updateAlert(s: [string, AlertTypes]){
+    this.alerText.next(s);
+  }
+
+  getAlert(){
+    return this.alerText.asObservable();
   }
 
   openMenu(){

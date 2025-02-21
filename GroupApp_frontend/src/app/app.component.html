@@ -1,10 +1,13 @@
 
-  
   <div class="background" >
+    
     <div @goDark *ngIf="this.filter?.filterClicked=='open' ||  this.menu?.slideToggle == 'open' || this.personal?.slideToggle == 'open' || this.eventInfo?.isOpen == 'open' || this.create?.isOpen || this.login?.open" class="shield" (click)="clickOut()"></div>
     <!-- <div @goDark *ngIf="this.filter?.filterClicked=='open'" class="shield" (click)="clickOut()"></div> -->
+    <app-alert></app-alert>
     <app-topbar #topbar (menu_out)="toggleMenu($event)" (switchRequest)="switchRequest()"></app-topbar>
+    <app-notification-tab></app-notification-tab>
     <div class="app-container">
+      
       <app-menu #menu ></app-menu>
       <app-filter-sidebar #filters (click_out)="onClick()"></app-filter-sidebar>
       <app-personal-area-sidebar *ngIf="logged" (eventCreate)="openCreate()" #personal></app-personal-area-sidebar>

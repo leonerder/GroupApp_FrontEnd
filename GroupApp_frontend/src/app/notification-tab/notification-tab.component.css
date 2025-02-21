@@ -1,0 +1,63 @@
+.notification-tab{
+    top: 10%;
+    height: 30%;
+    width: 30%;
+    right: 4%;
+    padding: 1%;
+}
+
+.title-container{
+    display: flex;
+    justify-content: center;
+}
+
+.notification-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    padding: 2%
+    /* todo */
+}
+
+.notification{
+    position: relative;
+    border-radius: 6px;
+    border: 1px solid var(--tertiary-color);
+    width: 90%;
+    height: fit-content;
+    box-shadow: 5px 5px 0px -3px rgba(0,0,0,0.42);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+
+.notification:hover{
+    border: 1px solid var(--accent-color);
+}
+
+.simpletext{
+    max-width: 60%;
+    word-wrap: break-word;
+}
+
+.icon-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 20%;
+    height: 100%;
+}
+
+.delete-icon{
+    position: absolute;
+    right: 10px;
+}
+
+.active-simple-icon{
+    margin: 2px;
+}

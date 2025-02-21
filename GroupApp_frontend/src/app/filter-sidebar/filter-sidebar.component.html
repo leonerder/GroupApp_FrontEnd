@@ -1,7 +1,7 @@
 <div class="main-container" [@slide]="filterClicked" class="main-container" id="container">
     <div class="title-container">
         <p class="title">Filtri</p>
-        <mat-icon class=" active-icon close-icon" (click)="onClick()" >filter_list</mat-icon>
+        <mat-icon class="active-icon close-icon" (click)="onClick()" >search</mat-icon>
         
         
     </div>
@@ -36,7 +36,7 @@
 
             <div class="button-container">
                 <button type="submit" class="button2">Conferma</button>
-                <mat-icon class="active-icon" (click)="resetFilter(); submitFilters()">filter_list_off</mat-icon>
+                <mat-icon class="active-icon" (click)="resetFilter(); submitFilters()">search_off</mat-icon>
             </div>
             
         </form>
