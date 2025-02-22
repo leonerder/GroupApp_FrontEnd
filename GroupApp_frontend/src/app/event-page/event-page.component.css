@@ -71,4 +71,5 @@ p{
     display: flex;
     flex-direction: column;
     margin-left: 4%;
+    word-wrap: break-word;
 }

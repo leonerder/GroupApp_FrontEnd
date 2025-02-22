@@ -1,5 +1,6 @@
 .alert-container{
     position: absolute;
+    z-index: 10;
     padding: 1%;
     width: 30%;
     height: 10%;

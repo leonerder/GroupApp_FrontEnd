@@ -13,21 +13,30 @@
                     <p class="title">{{event.name}}</p> 
                 </div>
                 <div class="fields-container">
+
                     <div class="info-container">
-                        <p class="subtitle">Quando:</p>
-                        <p>{{date}}</p>
+                        <mat-icon>event</mat-icon>
+                        <p class="subtitle">{{date}}</p>
+                    </div>
+                    
+                    <div class="info-container">
+                        <mat-icon>location_on</mat-icon>
+                        <p class="subtitle">{{event.place}}</p>
+                        
                     </div>
                     <div class="info-container">
-                        <p class="subtitle">Dove:</p>
-                        <p>{{event.place}}</p>
+                        <mat-icon>groups</mat-icon>
+                        <p class="subtitle">{{event.target}}</p>
                     </div>
-                    <div *ngIf="hovering == 'hovering'" class="info-container">
-                        <p class="subtitle">Categoria:</p>
-                        <p>{{event.target}}</p>
+                    <div class="info-container">
+                        <mat-icon>book</mat-icon>
+                        <p class="subtitle">{{remaining_places}}/{{event.maxPartecipants}}</p>
+                        
                     </div>
-                    <div *ngIf="hovering == 'hovering'" class="info-container">
-                        <p class="subtitle">Posti Rimasti:</p>
-                        <p>{{remaining_places}}</p>
+
+                    <div class="info-container">
+                        <p class="subtitle description">{{event.description}}</p>
+                        
                     </div>
                 
                 </div>
@@ -36,20 +45,21 @@
         
 
         </div>
-        <div [ngSwitch]="request" class="button-container">
+        <div [ngSwitch]="request" class="button-container" [class.fadebut]="hovering == 'hovering'"  >
+            <mat-icon class="active-simple-icon" (click)="emit_event()">open_in_new</mat-icon>
             <div *ngSwitchCase='"Eventi"'>
-                <button *ngIf="logged" class="button2" (click)="join()">Partecipa</button>
+                <button class="button2 button3" (click)="join()">Partecipa</button>
             </div>
             <div *ngSwitchCase='"Richieste"'>
-                <button class="button2 req-button" (click)="accept()">Accetta</button>
-                <button class="button2 req-button" (click)="reject()">Rifiuta</button>
+                <button class="button2 button3" (click)="accept()">Accetta</button>
+                <button class="button2 button3" (click)="reject()">Rifiuta</button>
             </div>
             <div *ngSwitchDefault>evento undefined</div>
-            <mat-icon class="active-icon" (click)="emit_event()">info</mat-icon>
-            <mat-icon *ngif="admin" class="active-icon" (click)="this.delete()">delete</mat-icon>
+            
+            <mat-icon *ngif="admin" class="active-simple-icon" (click)="this.delete()">delete</mat-icon>
         </div>
         
-        <div class="gradient" [class.fade]="hovering == 'hovering'"  alt="poster" [@slide]="hovering"></div>
+        <div class="gradient" [class.fade]="hovering == 'hovering'"  alt="poster"></div>
 </div>
     
     

@@ -68,8 +68,18 @@ export class EventContainerComponent {
       },
       error: (err) => console.log(err)
     })
+
+    let e = new Event();
+    e.name = 'evento di prova';
+    e.date = new Date();
+    e.description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    e.maxPartecipants = 10;
+    e.place = 'casa ari'
+    e.target = Target.FAMILY
+    e.type = Type.CULTURA
+    e.price = 1000;
     
-    this.events = [];
+    this.events = [e];
     this.filters = new Filter(undefined,undefined,undefined,undefined,undefined);
     
   }
@@ -87,7 +97,7 @@ export class EventContainerComponent {
       
       this.apiService.getEventsFiltered(this.start, this.filters).subscribe({
         next: (data: string | any[]) => {
-              if(!this.justAdd) this.events = [];
+              // if(!this.justAdd) this.events = [];
               this.start = 0;
               this.justAdd = false;
               for(let e = 0; e<data.length; e++){

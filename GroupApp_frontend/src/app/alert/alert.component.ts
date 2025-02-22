@@ -37,6 +37,7 @@ export class AlertComponent {
         this.type = text[1]
         this.isOpen = true;
         this.switchTitle()
+        this.ngOnInit()
       },
       error: (err) => console.log(err)
     })

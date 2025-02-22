@@ -50,6 +50,20 @@ import VanillaTilt from 'vanilla-tilt'
       transition('*=> out', [animate('0.3s ease')]),
       transition('*=> hovering', [animate('0.3s ease')]),
     ]),
+    trigger('button', [
+      state('hovering',
+        style({
+          transform: "opacity(0%)"
+        })
+      ),
+      state('out',
+        style({
+          transform: "opacity(100%)"
+        })
+      ),
+      transition('*=> out', [animate('0.3s ease')]),
+      transition('*=> hovering', [animate('0.3s ease')]),
+    ]),
   ],
   templateUrl: './eventcard.component.html',
   styleUrl: './eventcard.component.css',
@@ -64,7 +78,7 @@ export class EventcardComponent {
   date: string = "";
   remaining_places = 0;
 
-  logged: boolean = false;
+  logged: boolean = true;
   admin: boolean = false;
 
   constructor(private apiService: ApiService, private linkService: LinkingService){

@@ -13,17 +13,20 @@
                 </div>
 
                 <div class="password">
-                    <div class="field-div">
-                        <label for="password" class="field-label">Password</label>
-                        <input type="{{shown}}" min="0" max="1000" value="0" id="password" formControlName="password" class="field-input">
-                        
+                    <div class="visibility">
+                        <div class="field-div">
+                            <label for="password" class="field-label">Password</label>
+                            <input type="{{shown}}" min="0" max="1000" value="0" id="password" formControlName="password" class="field-input">
+                            
+                        </div>
+                        <mat-icon class="active-icon visibility-icon " (click)="change(); state = state =='visibility' ? 'visibility_off' : 'visibility'">{{state}}</mat-icon>
+
                     </div>
                     
                 </div>
                 
                 <div class="button-container">
                     <button type="submit" class="button2">Accedi</button>
-                    <mat-icon class="active-icon" (click)="change(); state = state =='visibility' ? 'visibility_off' : 'visibility'">{{state}}</mat-icon>
                 </div>
                 
             </form>
@@ -35,10 +38,18 @@
                     <input type="text" id="email" formControlName="email" class="field-input"   >
                 </div>
 
-                <div class="field-div">
-                    <label for="password" class="field-label">Password</label>
-                    <input type="{{shown}}" id="password" formControlName="password" class="field-input">
+                <div class="visibility">
+                    <div class="field-div">
+                        <label for="password" class="field-label">Password</label>
+                        <input type="{{shown}}" id="password" formControlName="password" class="field-input">
+                        
+    
+                    </div>
+                    
+                    <mat-icon class="active-icon visibility-icon" (click)="change(); state = state =='visibility' ? 'visibility_off' : 'visibility'">{{state}}</mat-icon>
+
                 </div>
+                
 
                 <div class="field-div">
                     <label for="name" class="field-label">Nome</label>
@@ -62,7 +73,7 @@
 
                 <div class="button-container">
                     <button type="submit" class="button2">Registrati</button>
-                    <mat-icon class="active-icon" (click)="change(); state = state =='visibility' ? 'visibility_off' : 'visibility'">{{state}}</mat-icon>
+                    
                 </div>
                 
             </form>
