@@ -41,12 +41,24 @@
                 <div class="visibility">
                     <div class="field-div">
                         <label for="password" class="field-label">Password</label>
-                        <input type="{{shown}}" id="password" formControlName="password" class="field-input">
+                        <input type="{{this.shown}}" id="password" formControlName="password" class="field-input">
                         
     
                     </div>
                     
                     <mat-icon class="active-icon visibility-icon" (click)="change(); state = state =='visibility' ? 'visibility_off' : 'visibility'">{{state}}</mat-icon>
+
+                </div>
+
+                <div class="visibility">
+                    <div class="field-div">
+                        <label for="repassword" class="field-label">Ripteti Password</label>
+                        <input type="{{this.reshown}}" id="repassword" formControlName="repassword" class="field-input">
+                        
+    
+                    </div>
+                    
+                    <mat-icon class="active-icon visibility-icon" (click)="rechange(); restate = restate =='visibility' ? 'visibility_off' : 'visibility'">{{restate}}</mat-icon>
 
                 </div>
                 

@@ -3,7 +3,7 @@
     z-index: 10;
     padding: 1%;
     width: 30%;
-    height: 10%;
+    height: fit-content;
     left: 35%;
     top: 5%;
 }

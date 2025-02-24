@@ -5,6 +5,9 @@ import { MatIcon } from '@angular/material/icon';
 import { User } from '../app.component';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ApiService } from '../services/api/api.service';
+import e from 'express';
+import { LinkingService } from '../services/linking/linking.service';
+import { AlertTypes } from '../alert/alert.component';
 
 
 @Component({
@@ -31,11 +34,13 @@ export class LoginComponent {
   
   open = false;
   state: 'visibility' | 'visibility_off' = 'visibility';
+  restate: 'visibility' | 'visibility_off' = 'visibility';
 
   @Input() purpose: 'login' | 'signup';
 
   err: string | null;
   shown: 'password' | 'text' = 'password';
+  reshown: 'password' | 'text' = 'password';
 
   loginform = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
@@ -45,13 +50,14 @@ export class LoginComponent {
   signupform = new FormGroup({
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    repassword: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
     date: new FormControl('', Validators.required),
     telephone: new FormControl(''),
   })
 
-  constructor(private apiService: ApiService){
+  constructor(private apiService: ApiService, private linkservice: LinkingService){
     this.purpose = 'login'
     this.err = null;
   }
@@ -63,6 +69,16 @@ export class LoginComponent {
       this.shown = 'password';
     }
   }
+
+  rechange(){
+    if(this.reshown == 'password') {
+      this.reshown = 'text';
+    } else {
+      this.reshown = 'password';
+    }
+  }
+
+  
 
   login(){
     //chiamata al login
@@ -85,7 +101,7 @@ export class LoginComponent {
   }
 
   signup(){
-    if(this.signupform.valid){
+    if(this.signupform.valid && this.signupform.value.password == this.signupform.value.repassword){
 
       let user =  {
         email: this.signupform.value.email,
@@ -104,6 +120,13 @@ export class LoginComponent {
         
       });
       
+     } else {
+      if(this.signupform.invalid){
+        this.linkservice.updateAlert(['Attenzione, tutti i campi devono essere compilati', AlertTypes.ERROR])
+      }
+      if(this.signupform.value.password != this.signupform.value.repassword){
+        this.linkservice.updateAlert(['le due password non coincidono', AlertTypes.ERROR])
+      }
      }
   }
 
